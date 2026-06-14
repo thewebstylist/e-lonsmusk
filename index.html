@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IMAGINE Group AI™ — Investor Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#05070d;
+  --bg2:#0a0f1c;
+  --panel:rgba(255,255,255,.035);
+  --panel-brd:rgba(255,255,255,.09);
+  --ink:#f4f1e9;
+  --muted:#9aa3b2;
+  --faint:#6b7384;
+  --gold:#f5c451;
+  --gold2:#e0a93b;
+  --gold-deep:#c8881f;
+  --learn:#3b82f6;
+  --build:#39a85a;
+  --create:#a855f7;
+  --scale:#f0911f;
+  --impact:#2dd4c4;
+  --radius:18px;
+  --shadow:0 30px 80px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.deck{position:fixed;inset:0;}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  padding:clamp(28px,5vw,80px);
+  opacity:0;visibility:hidden;
+  transform:scale(.98);
+  transition:opacity .55s ease, transform .55s ease, visibility .55s;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgba(245,196,81,.07), transparent 60%),
+    radial-gradient(900px 600px at 90% 110%, rgba(59,130,246,.08), transparent 60%),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible;transform:scale(1);z-index:2;}
+.slide.active .reveal{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
+.slide.active .reveal:nth-child(2){animation-delay:.06s}
+.slide.active .reveal:nth-child(3){animation-delay:.12s}
+.slide.active .reveal:nth-child(4){animation-delay:.18s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* subtle grid texture */
+.slide::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(900px 600px at 50% 40%,#000,transparent 80%);
+}
+
+/* ---------- typography ---------- */
+.eyebrow{font-family:'Sora';letter-spacing:.32em;text-transform:uppercase;font-size:clamp(10px,1vw,13px);color:var(--gold);font-weight:600}
+h1,h2,h3{font-family:'Sora';line-height:1.04;font-weight:800}
+.slide h2{font-size:clamp(26px,3.6vw,54px);letter-spacing:-.01em}
+.subhead{color:var(--muted);font-size:clamp(13px,1.4vw,18px);font-weight:400;margin-top:10px;max-width:62ch}
+.gold{color:var(--gold)}
+.headwrap{position:relative;z-index:3;text-align:center;margin-bottom:clamp(16px,2.4vw,34px)}
+
+/* ---------- logo ---------- */
+.logo{display:inline-flex;align-items:center;gap:14px;justify-content:center}
+.logo .mark{width:48px;height:48px;flex:0 0 auto}
+.logo .mark svg{width:100%;height:100%;display:block}
+.logo .name{font-family:'Sora';font-weight:700;letter-spacing:.18em;font-size:14px;line-height:1.2;text-align:left}
+.logo .name span{display:block;color:var(--muted);font-size:9px;letter-spacing:.4em}
+
+/* ---------- panels / cards ---------- */
+.panel{
+  background:var(--panel);
+  border:1px solid var(--panel-brd);
+  border-radius:var(--radius);
+  backdrop-filter:blur(6px);
+  position:relative;z-index:3;
+}
+.glow-brd{box-shadow:inset 0 1px 0 rgba(255,255,255,.05), var(--shadow)}
+.grid{display:grid;gap:clamp(14px,1.6vw,22px);position:relative;z-index:3}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+/* footer tagline */
+.tagline{position:relative;z-index:3;text-align:center;margin-top:clamp(14px,2vw,26px);
+  font-family:'Sora';font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  font-size:clamp(11px,1.15vw,15px);color:var(--gold2)}
+
+/* engine list */
+.engine{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:14px;
+  border:1px solid var(--panel-brd);background:rgba(255,255,255,.025)}
+.engine .dot{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;font-size:20px}
+.engine h3{font-size:clamp(15px,1.5vw,20px);letter-spacing:.04em}
+.engine p{color:var(--muted);font-size:clamp(11px,1.05vw,13px);margin-top:2px}
+.b-learn{background:rgba(59,130,246,.16);color:var(--learn);box-shadow:0 0 0 1px rgba(59,130,246,.35)}
+.b-build{background:rgba(57,168,90,.16);color:var(--build);box-shadow:0 0 0 1px rgba(57,168,90,.35)}
+.b-create{background:rgba(168,85,247,.16);color:var(--create);box-shadow:0 0 0 1px rgba(168,85,247,.35)}
+.b-scale{background:rgba(240,145,31,.16);color:var(--scale);box-shadow:0 0 0 1px rgba(240,145,31,.35)}
+.b-impact{background:rgba(45,212,196,.16);color:var(--impact);box-shadow:0 0 0 1px rgba(45,212,196,.35)}
+
+ul.ticks{list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.ticks li{display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-size:clamp(12px,1.15vw,15px)}
+ul.ticks li::before{content:"";width:18px;height:18px;flex:0 0 auto;margin-top:2px;border-radius:6px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;}
+ul.x li::before{
+  background:rgba(255,255,255,.25);
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat;}
+ul.x li{color:var(--muted)}
+
+.card-h{font-family:'Sora';font-weight:700;font-size:clamp(16px,1.7vw,22px);letter-spacing:.03em}
+.card-sub{color:var(--muted);font-size:clamp(11px,1.1vw,14px);margin-top:4px}
+.kpi{font-family:'Sora';font-weight:800;font-size:clamp(30px,4vw,52px);
+  background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.kpi-label{color:var(--faint);text-transform:uppercase;letter-spacing:.22em;font-size:10px;font-weight:600;margin-bottom:6px}
+
+/* big number hero (the ask) */
+.ask{display:flex;align-items:center;justify-content:center;gap:clamp(18px,3vw,46px);flex-wrap:wrap}
+.ask .op{font-family:'Sora';font-size:clamp(34px,5vw,72px);font-weight:300;color:var(--faint)}
+.ask .num{font-family:'Sora';font-weight:800;font-size:clamp(48px,8vw,120px);line-height:.9;
+  background:linear-gradient(180deg,#fff 10%,var(--gold) 70%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ask .cap{font-size:clamp(11px,1.1vw,14px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px;text-align:center}
+.ask .sub{color:var(--muted);font-size:clamp(11px,1.1vw,14px);margin-top:6px;max-width:24ch;text-align:center;font-weight:400}
+.ask-col{display:flex;flex-direction:column;align-items:center}
+
+.pillrow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.pill{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;border:1px solid var(--panel-brd);
+  background:rgba(255,255,255,.03);font-size:clamp(11px,1vw,13px);color:var(--ink);font-weight:500}
+.pill .pi{width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+
+/* scenario cards */
+.scenario{padding:clamp(18px,2vw,30px);border-radius:var(--radius);border:1px solid var(--panel-brd);position:relative;overflow:hidden}
+.scenario.base{border-color:rgba(245,196,81,.45);background:rgba(245,196,81,.05)}
+.scenario .tag{font-family:'Sora';font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:12px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.scenario .row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid rgba(255,255,255,.07)}
+.scenario .row:first-of-type{border-top:none}
+.scenario .row .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.scenario .row .v{font-family:'Sora';font-weight:700;font-size:clamp(16px,1.7vw,24px)}
+.scenario .moic{color:var(--gold)}
+
+/* tranche timeline */
+.tranche{padding:clamp(16px,1.6vw,24px);border-radius:var(--radius);border:1px solid var(--panel-brd);position:relative;background:rgba(255,255,255,.02)}
+.tranche .top{height:4px;border-radius:4px;margin-bottom:16px}
+.tranche .name{font-family:'Sora';font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+.tranche .amt{font-family:'Sora';font-weight:800;font-size:clamp(24px,2.6vw,38px);margin:4px 0}
+.tranche .role{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px}
+.tranche ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tranche li{font-size:clamp(11px,1.05vw,13px);color:var(--ink);padding-left:16px;position:relative}
+.tranche li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tranche .when{margin-top:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+
+/* legend for donut */
+.legend{display:flex;flex-direction:column;gap:11px}
+.legend .li{display:flex;align-items:center;gap:12px;font-size:clamp(12px,1.1vw,15px)}
+.legend .sw{width:13px;height:13px;border-radius:4px;flex:0 0 auto}
+.legend .nm{flex:1;color:var(--ink)}
+.legend .vl{font-family:'Sora';font-weight:600;color:var(--muted)}
+
+/* nav */
+.hud{position:fixed;z-index:50;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;pointer-events:none}
+.hud .brand{font-family:'Sora';font-weight:700;letter-spacing:.18em;font-size:11px;color:var(--faint);text-transform:uppercase}
+.hud .ctrls{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.nav-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--panel-brd);background:rgba(255,255,255,.04);
+  color:var(--ink);cursor:pointer;font-size:16px;display:grid;place-items:center;transition:.2s}
+.nav-btn:hover{background:rgba(245,196,81,.15);border-color:var(--gold)}
+.counter{font-family:'Sora';font-weight:600;font-size:13px;color:var(--muted);min-width:54px;text-align:center}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-deep));z-index:60;transition:width .4s ease;box-shadow:0 0 12px rgba(245,196,81,.6)}
+
+/* dots */
+.dots{position:fixed;z-index:50;top:50%;right:18px;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px}
+.dots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.2);cursor:pointer;padding:0;transition:.25s}
+.dots button.on{background:var(--gold);transform:scale(1.35);box-shadow:0 0 10px var(--gold)}
+
+.hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:40;font-size:11px;color:var(--faint);letter-spacing:.08em;pointer-events:none;transition:opacity .6s}
+
+/* helpers */
+.center{text-align:center}
+.two{grid-template-columns:1fr 1fr}
+.three{grid-template-columns:repeat(3,1fr)}
+.four{grid-template-columns:repeat(4,1fr)}
+.divider{width:1px;background:linear-gradient(180deg,transparent,var(--panel-brd),transparent)}
+.note{position:relative;z-index:3;margin-top:14px;color:var(--muted);font-size:clamp(11px,1.1vw,14px);text-align:center}
+.tm{font-size:.55em;vertical-align:super;color:var(--gold2);font-weight:600}
+
+@media (max-width:880px){
+  .two,.three,.four{grid-template-columns:1fr}
+  .dots{display:none}
+  .engine p{display:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1 — TITLE ============ -->
+  <section class="slide active">
+    <div class="body center" style="align-items:center">
+      <div class="reveal logo" style="margin-bottom:34px;transform:scale(1.4)">
+        <div class="mark">
+          <svg viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#c8881f"/></linearGradient></defs>
+          <path d="M50 8 L88 86 L66 86 L50 46 L34 86 L12 86 Z" fill="url(#g1)"/>
+          <circle cx="50" cy="60" r="5" fill="#05070d"/><rect x="46" y="66" width="8" height="20" rx="3" fill="#05070d"/>
+          </svg>
+        </div>
+        <div class="name">IMAGINE<br>GROUP AI<span>EST. THE AI ECONOMY</span></div>
+      </div>
+      <h1 class="reveal" style="font-size:clamp(40px,8vw,110px);background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em">IMAGINE<br>GROUP AI<span class="tm">™</span></h1>
+      <p class="reveal" style="font-family:'Sora';letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-size:clamp(13px,1.7vw,22px);margin-top:24px;font-weight:600">The Operating System<br>for the AI Economy</p>
+    </div>
+    <div class="reveal tagline">One Ecosystem &nbsp;·&nbsp; Five Engines &nbsp;·&nbsp; Endless Possibilities</div>
+  </section>
+
+  <!-- ============ SLIDE 2 — FIVE ENGINES ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">The Platform</div>
+      <h2>One Ecosystem. <span class="gold">Five Engines.</span></h2>
+      <p class="subhead" style="margin:10px auto 0">A vertically integrated platform that acquires talent, develops innovation, creates IP, scales through software, and reinvests impact.</p>
+    </div>
+    <div class="body">
+      <div class="grid reveal" style="gap:12px">
+        <div class="engine"><div class="dot b-learn">◑</div><div><h3>LEARN — Hart Academy AI<span class="tm">™</span></h3><p>We educate — empowering the next generation with AI knowledge and skills.</p></div></div>
+        <div class="engine"><div class="dot b-build">◈</div><div><h3>BUILD — Imagine AI Labs<span class="tm">™</span></h3><p>We build — turning ideas into tools, solutions, and startups that solve real-world problems.</p></div></div>
+        <div class="engine"><div class="dot b-create">▶</div><div><h3>CREATE — Imagine Studios<span class="tm">™</span></h3><p>We create — transforming ideas into stories, content, and intellectual property that inspire.</p></div></div>
+        <div class="engine"><div class="dot b-scale">▲</div><div><h3>SCALE — Creative Intelligence<span class="tm">™</span></h3><p>We scale — intelligent systems that power businesses, industries, and the AI economy.</p></div></div>
+        <div class="engine"><div class="dot b-impact">♥</div><div><h3>IMPACT — JohnReinhard.org<span class="tm">™</span></h3><p>We impact — reinvesting success to uplift communities and create opportunity.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal tagline">One Ecosystem. Endless Possibilities.</div>
+  </section>
+
+  <!-- ============ SLIDE 3 — WHY THIS MODEL WINS ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Why This Model Wins</div>
+      <h2>The Compounding Power of <span class="gold">Integration</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid two reveal">
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="kpi-label" style="color:var(--faint)">Traditional Model</div>
+          <ul class="ticks x">
+            <li>One revenue stream</li>
+            <li>One market</li>
+            <li>Limited cross-sell</li>
+            <li>Higher acquisition cost</li>
+            <li>Linear growth</li>
+          </ul>
+        </div>
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px);border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.04)">
+          <div class="kpi-label gold">Imagine Group AI</div>
+          <ul class="ticks">
+            <li>Shared audience</li>
+            <li>Shared IP &amp; shared data</li>
+            <li>Multiple revenue streams</li>
+            <li>Lower acquisition costs</li>
+            <li>Recurring revenue expansion</li>
+            <li><strong>Exponential growth</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="reveal tagline">One Ecosystem. Multiple Advantages. Compounding Value.</div>
+  </section>
+
+  <!-- ============ SLIDE 4 — LEARN + BUILD ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Learn + Build</div>
+      <h2>The Foundation of Our <span class="gold">Ecosystem</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid two reveal">
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="card-h" style="color:var(--learn)">Hart Academy AI<span class="tm">™</span></div>
+          <div class="card-sub">Preparing the next generation of AI leaders.</div>
+          <div style="margin:18px 0">
+            <div class="kpi-label">FY2031 Revenue Target</div>
+            <div class="kpi">$28M</div>
+          </div>
+          <ul class="ticks"><li>Education &amp; training</li><li>Certification</li><li>Workforce development</li><li>Executive education</li><li>Global partnerships</li></ul>
+        </div>
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="card-h" style="color:var(--build)">Imagine AI Labs<span class="tm">™</span></div>
+          <div class="card-sub">Where ideas become reality.</div>
+          <div class="kpi-label" style="margin:18px 0 12px">Innovation engine for</div>
+          <ul class="ticks"><li>Innovation hubs</li><li>Startup incubation</li><li>R&amp;D partnerships</li><li>Enterprise collaboration</li><li>AI talent pipeline</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="reveal tagline">Education Becomes Acquisition. Talent Becomes Innovation.</div>
+  </section>
+
+  <!-- ============ SLIDE 5 — CREATE + SCALE ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Create + Scale</div>
+      <h2>From Imagination to <span class="gold">Intelligence at Scale</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid two reveal">
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="card-h" style="color:var(--create)">Imagine Studios<span class="tm">™</span></div>
+          <div class="card-sub">Where imagination meets intelligence.</div>
+          <div class="kpi-label" style="margin:18px 0 12px">Key outputs</div>
+          <ul class="ticks"><li>Film &amp; media</li><li>Branded content</li><li>Creator economy</li><li>Intellectual property</li><li>Digital experiences</li></ul>
+        </div>
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="card-h" style="color:var(--scale)">Creative Intelligence<span class="tm">™</span></div>
+          <div class="card-sub">Building the intelligence layer for the AI economy.</div>
+          <div style="margin:18px 0">
+            <div class="kpi-label">FY2031 Target — SaaS &amp; Agents</div>
+            <div class="kpi">$42M</div>
+          </div>
+          <ul class="ticks"><li>AI agents</li><li>SaaS platforms</li><li>Enterprise software</li><li>Data &amp; IP monetization</li><li>Recurring revenue</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="reveal tagline">Intellectual Property Becomes Recurring Revenue.</div>
+  </section>
+
+  <!-- ============ SLIDE 6 — IMPACT ENGINE ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Impact Engine</div>
+      <h2>Reinvesting Success. <span class="gold">Creating Lasting Change.</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid two reveal">
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="kpi-label gold">Economic Impact</div>
+          <ul class="ticks"><li>Jobs &amp; employment</li><li>Entrepreneurship</li><li>Workforce development</li><li>Local economic growth</li></ul>
+        </div>
+        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+          <div class="kpi-label" style="color:var(--impact)">Social Impact</div>
+          <ul class="ticks"><li>Education access</li><li>AI literacy</li><li>Community advancement</li><li>Opportunity creation</li></ul>
+        </div>
+      </div>
+      <div class="note reveal" style="margin-top:22px">
+        <strong style="color:var(--impact);font-family:'Sora';letter-spacing:.05em">JohnReinhard.org<span class="tm">™</span></strong> — Empowering human potential through education, opportunity, and innovation<span class="tm">™</span>
+      </div>
+    </div>
+    <div class="reveal tagline">Success Funds Future Opportunity.</div>
+  </section>
+
+  <!-- ============ SLIDE 7 — THE ASK ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">The Ask</div>
+      <h2>Invest in the Future of the <span class="gold">AI Economy</span></h2>
+    </div>
+    <div class="body">
+      <div class="ask reveal">
+        <div class="ask-col"><div class="num">$24M</div><div class="cap">Equity Raise</div><div class="sub">To build, scale, and lead the next era of creative intelligence.</div></div>
+        <div class="op">+</div>
+        <div class="ask-col"><div class="num">$4M</div><div class="cap">Optional Revolving Facility</div><div class="sub">For working capital and strategic flexibility.</div></div>
+        <div class="op">=</div>
+        <div class="ask-col"><div class="num">$28M</div><div class="cap">Total Financing Capacity</div></div>
+      </div>
+      <div class="pillrow reveal" style="margin-top:34px">
+        <span class="pill"><span class="pi"></span>Milestone-based tranches</span>
+        <span class="pill"><span class="pi"></span>Capital discipline</span>
+        <span class="pill"><span class="pi"></span>De-risked execution</span>
+        <span class="pill"><span class="pi"></span>Investor alignment</span>
+      </div>
+    </div>
+    <div class="reveal tagline">Capital Will Be Deployed Against Milestones. Not Ambition.</div>
+  </section>
+
+  <!-- ============ SLIDE 8 — USE OF PROCEEDS ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Use of Proceeds</div>
+      <h2>Building the <span class="gold">Platform Layer</span> for the AI Economy</h2>
+    </div>
+    <div class="body">
+      <div class="grid two reveal" style="align-items:center;grid-template-columns:.85fr 1.15fr">
+        <div style="display:grid;place-items:center">
+          <svg id="donut" viewBox="0 0 200 200" style="width:min(320px,70%);height:auto">
+            <g id="donutSegs" transform="rotate(-90 100 100)"></g>
+            <circle cx="100" cy="100" r="56" fill="#05070d"/>
+            <text x="100" y="94" text-anchor="middle" fill="#f5c451" font-family="Sora" font-weight="800" font-size="22">$24M</text>
+            <text x="100" y="114" text-anchor="middle" fill="#9aa3b2" font-family="Inter" font-size="9" letter-spacing="2">EQUITY RAISE</text>
+          </svg>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+    </div>
+    <div class="reveal tagline">60%+ of Capital Goes Directly Into People, Products, Curriculum &amp; IP.</div>
+  </section>
+
+  <!-- ============ SLIDE 9 — GROWTH ROADMAP ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Growth Roadmap</div>
+      <h2>Projected <span class="gold">Revenue Growth</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid reveal" style="grid-template-columns:1.6fr .8fr;align-items:center;gap:clamp(18px,3vw,40px)">
+        <div class="panel glow-brd" style="padding:clamp(18px,2.2vw,30px)">
+          <svg id="chart" viewBox="0 0 560 320" style="width:100%;height:auto"></svg>
+        </div>
+        <div>
+          <div class="kpi-label">FY2031 Revenue Target</div>
+          <div class="kpi" style="font-size:clamp(36px,4.6vw,62px)">$118.5M</div>
+          <div style="margin-top:26px" class="kpi-label">Positive EBITDA Target</div>
+          <div class="kpi" style="font-size:clamp(30px,3.6vw,48px)">FY2030</div>
+          <div class="note" style="text-align:left;margin-top:18px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--gold2)">Scalable. Profitable. Impactful.</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal tagline">Growth Driven by Recurring Revenue and Platform Leverage.</div>
+  </section>
+
+  <!-- ============ SLIDE 10 — CAPITAL DEPLOYMENT ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Capital Deployment Timeline</div>
+      <h2>Milestone-Based. <span class="gold">Disciplined. Strategic.</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid four reveal">
+        <div class="tranche"><div class="top" style="background:var(--learn)"></div><div class="name">Tranche A</div><div class="amt">$9M</div><div class="role">Foundation</div><ul><li>Governance &amp; legal</li><li>Academy launch</li><li>Studio operations</li><li>Enterprise pilots</li></ul><div class="when">0 – 12 months</div></div>
+        <div class="tranche"><div class="top" style="background:var(--build)"></div><div class="name">Tranche B</div><div class="amt">$8M</div><div class="role">Commercial Validation</div><ul><li>Certification engine</li><li>AI Labs expansion</li><li>SaaS development</li><li>Direct sales build</li></ul><div class="when">12 – 24 months</div></div>
+        <div class="tranche"><div class="top" style="background:var(--create)"></div><div class="name">Tranche C</div><div class="amt">$7M</div><div class="role">Scale Acceleration</div><ul><li>Strategic partnerships</li><li>Recurring revenue scale</li><li>International readiness</li><li>Brand expansion</li></ul><div class="when">24 – 36 months</div></div>
+        <div class="tranche" style="border-color:rgba(245,196,81,.4);background:rgba(245,196,81,.04)"><div class="top" style="background:var(--gold)"></div><div class="name">Optional Revolver</div><div class="amt">$4M</div><div class="role">Working Capital</div><ul><li>Growth capital</li><li>Cash flow flexibility</li></ul><div class="when">Ongoing</div></div>
+      </div>
+    </div>
+    <div class="reveal tagline">Each Tranche Unlocked by Measurable Milestones and KPIs.</div>
+  </section>
+
+  <!-- ============ SLIDE 11 — RETURN SCENARIOS ============ -->
+  <section class="slide">
+    <div class="headwrap reveal">
+      <div class="eyebrow">Investor Return Scenarios</div>
+      <h2>Multiple Paths to <span class="gold">Significant Value Creation</span></h2>
+    </div>
+    <div class="body">
+      <div class="grid three reveal">
+        <div class="scenario"><div class="tag" style="color:var(--build)">◍ Conservative</div>
+          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$82M</span></div>
+          <div class="row"><span class="k">Exit Value</span><span class="v">$328M</span></div>
+          <div class="row"><span class="k">Investor Return</span><span class="v moic">4.5×</span></div>
+        </div>
+        <div class="scenario base"><div class="tag gold">★ Base Case</div>
+          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$118.5M</span></div>
+          <div class="row"><span class="k">Exit Value</span><span class="v">$770M</span></div>
+          <div class="row"><span class="k">Investor Return</span><span class="v moic">10.7×</span></div>
+        </div>
+        <div class="scenario"><div class="tag" style="color:var(--scale)">▲ Upside</div>
+          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$165M+</span></div>
+          <div class="row"><span class="k">Exit Value</span><span class="v">$1.4B+</span></div>
+          <div class="row"><span class="k">Investor Return</span><span class="v moic">19.5×</span></div>
+        </div>
+      </div>
+      <div class="note reveal">MOIC = Multiple on Invested Capital</div>
+    </div>
+    <div class="reveal tagline">The Goal Is Migration Toward Recurring Software &amp; Platform Economics.</div>
+  </section>
+
+  <!-- ============ SLIDE 12 — CLOSING ============ -->
+  <section class="slide">
+    <div class="body center" style="align-items:center">
+      <div class="reveal logo" style="margin-bottom:30px;transform:scale(1.3)">
+        <div class="mark"><svg viewBox="0 0 100 100"><path d="M50 8 L88 86 L66 86 L50 46 L34 86 L12 86 Z" fill="url(#g1)"/><circle cx="50" cy="60" r="5" fill="#05070d"/><rect x="46" y="66" width="8" height="20" rx="3" fill="#05070d"/></svg></div>
+        <div class="name">IMAGINE<br>GROUP AI<span>THE AI ECONOMY</span></div>
+      </div>
+      <h2 class="reveal" style="font-size:clamp(28px,4.4vw,64px);line-height:1.1">One Ecosystem.<br>Multiple Revenue Engines.<br><span class="gold">Scalable AI Infrastructure.</span><br>Measurable Social Impact.</h2>
+      <p class="reveal subhead" style="margin:24px auto 0;font-size:clamp(15px,1.8vw,22px);color:var(--gold2)">Seeking <strong style="color:var(--gold)">$24M</strong> to build the platform layer for the AI economy.</p>
+      <div class="reveal pillrow" style="margin-top:30px">
+        <span class="pill"><span class="pi" style="background:var(--learn)"></span>Learn</span>
+        <span class="pill"><span class="pi" style="background:var(--build)"></span>Build</span>
+        <span class="pill"><span class="pi" style="background:var(--create)"></span>Create</span>
+        <span class="pill"><span class="pi" style="background:var(--scale)"></span>Scale</span>
+        <span class="pill"><span class="pi" style="background:var(--impact)"></span>Impact</span>
+      </div>
+    </div>
+    <div class="reveal tagline">We Learn. We Build. We Create. We Scale. We Impact.</div>
+  </section>
+
+</div>
+
+<!-- HUD -->
+<div class="dots" id="dots"></div>
+<div class="hud">
+  <div class="brand">IMAGINE GROUP AI™ · Investor Pitch</div>
+  <div class="ctrls">
+    <button class="nav-btn" id="prev" aria-label="Previous">‹</button>
+    <div class="counter"><span id="cur">1</span> / <span id="tot">12</span></div>
+    <button class="nav-btn" id="next" aria-label="Next">›</button>
+  </div>
+</div>
+<div class="hint" id="hint">Use ← → arrow keys, click, or swipe to navigate · Press F for fullscreen</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const cur=document.getElementById('cur'), prog=document.getElementById('progress');
+  document.getElementById('tot').textContent=total;
+
+  // dots
+  const dotsEl=document.getElementById('dots');
+  slides.forEach((_,n)=>{const b=document.createElement('button');b.onclick=()=>go(n);dotsEl.appendChild(b);});
+  const dots=[...dotsEl.children];
+
+  function go(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,n2)=>s.classList.toggle('active',n2===i));
+    dots.forEach((d,n2)=>d.classList.toggle('on',n2===i));
+    cur.textContent=i+1;
+    prog.style.width=((i+1)/total*100)+'%';
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(i+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(total-1);
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  // click to advance (ignore controls)
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('.nav-btn, .dots, a, button'))return;
+    const x=e.clientX/window.innerWidth;
+    go(x<0.28?i-1:i+1);
+  });
+  // swipe
+  let sx=0;
+  addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?i+1:i-1);},{passive:true});
+  setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+
+  // ---- DONUT (slide 8) ----
+  const data=[
+    {nm:'Hiring & Payroll',v:9.8,p:41,c:'#c8881f'},
+    {nm:'Product / Curriculum / IP',v:4.6,p:19,c:'#39a85a'},
+    {nm:'Sales & Marketing',v:3.8,p:16,c:'#3b82f6'},
+    {nm:'Working Capital',v:1.8,p:7,c:'#a855f7'},
+    {nm:'Infrastructure & Cloud',v:1.6,p:7,c:'#2dd4c4'},
+    {nm:'Legal & Compliance',v:1.5,p:6,c:'#f0911f'},
+    {nm:'Equipment & CapEx',v:0.9,p:4,c:'#e05a5a'},
+  ];
+  const segG=document.getElementById('donutSegs');
+  const R=82, C=2*Math.PI*R; let off=0;
+  data.forEach(d=>{
+    const len=C*d.p/100;
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',100);c.setAttribute('cy',100);c.setAttribute('r',R);
+    c.setAttribute('fill','none');c.setAttribute('stroke',d.c);c.setAttribute('stroke-width',30);
+    c.setAttribute('stroke-dasharray',(len-2)+' '+(C-len+2));
+    c.setAttribute('stroke-dashoffset',-off);
+    segG.appendChild(c);
+    off+=len;
+  });
+  const leg=document.getElementById('legend');
+  data.forEach(d=>{
+    const r=document.createElement('div');r.className='li';
+    r.innerHTML=`<span class="sw" style="background:${d.c}"></span><span class="nm">${d.nm}</span><span class="vl">$${d.v}M · ${d.p}%</span>`;
+    leg.appendChild(r);
+  });
+
+  // ---- LINE CHART (slide 9) ----
+  const pts=[{y:'FY27',v:5.9},{y:'FY28',v:16.7},{y:'FY29',v:36.5},{y:'FY30',v:72.5},{y:'FY31',v:118.5}];
+  const svg=document.getElementById('chart');
+  const W=560,H=320,pad={l:54,r:24,t:24,b:44};
+  const max=120;
+  const xs=v=>pad.l+(W-pad.l-pad.r)*(v/(pts.length-1));
+  const ys=v=>H-pad.b-(H-pad.t-pad.b)*(v/max);
+  let g='';
+  [0,40,80,120].forEach(t=>{g+=`<line x1="${pad.l}" y1="${ys(t)}" x2="${W-pad.r}" y2="${ys(t)}" stroke="rgba(255,255,255,.08)"/><text x="${pad.l-10}" y="${ys(t)+4}" fill="#6b7384" font-size="11" text-anchor="end" font-family="Inter">$${t}M</text>`;});
+  let line='', area='';
+  pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);line+=(n?'L':'M')+x+' '+y+' ';area+=(n?'L':'M')+x+' '+y+' ';});
+  area+=`L${xs(pts.length-1)} ${ys(0)} L${xs(0)} ${ys(0)} Z`;
+  g+=`<defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c451" stop-opacity=".35"/><stop offset="1" stop-color="#f5c451" stop-opacity="0"/></linearGradient></defs>`;
+  g+=`<path d="${area}" fill="url(#ar)"/><path d="${line}" fill="none" stroke="#f5c451" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);
+    g+=`<circle cx="${x}" cy="${y}" r="5.5" fill="#05070d" stroke="#f5c451" stroke-width="3"/>`;
+    g+=`<text x="${x}" y="${y-14}" fill="#f4f1e9" font-size="12" font-weight="700" text-anchor="middle" font-family="Sora">$${p.v}M</text>`;
+    g+=`<text x="${x}" y="${H-pad.b+22}" fill="#9aa3b2" font-size="11" text-anchor="middle" font-family="Inter">${p.y}</text>`;});
+  svg.innerHTML=g;
+
+  go(0);
+})();
+</script>
+</body>
+</html>
