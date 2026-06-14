@@ -9,198 +9,183 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg:#05070d;
-  --bg2:#0a0f1c;
-  --panel:rgba(255,255,255,.035);
-  --panel-brd:rgba(255,255,255,.09);
-  --ink:#f4f1e9;
-  --muted:#9aa3b2;
-  --faint:#6b7384;
-  --gold:#f5c451;
-  --gold2:#e0a93b;
-  --gold-deep:#c8881f;
-  --learn:#3b82f6;
-  --build:#39a85a;
-  --create:#a855f7;
-  --scale:#f0911f;
-  --impact:#2dd4c4;
-  --radius:18px;
-  --shadow:0 30px 80px rgba(0,0,0,.55);
+  --bg:#04060c; --bg2:#0a1020;
+  --panel:rgba(255,255,255,.04); --panel-brd:rgba(255,255,255,.10);
+  --ink:#f5f2ea; --muted:#9aa3b4; --faint:#6b7484;
+  --gold:#f5c451; --gold2:#e0a93b; --gold-deep:#c8881f;
+  --learn:#3b82f6; --build:#39a85a; --create:#a855f7; --scale:#f0911f; --impact:#2dd4c4;
+  --radius:20px; --shadow:0 30px 80px rgba(0,0,0,.55);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  overflow:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-.deck{position:fixed;inset:0;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:fixed;inset:0}
+
 .slide{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  padding:clamp(28px,5vw,80px);
-  opacity:0;visibility:hidden;
-  transform:scale(.98);
-  transition:opacity .55s ease, transform .55s ease, visibility .55s;
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  padding:clamp(30px,4.2vh,64px) clamp(34px,5vw,96px);
+  opacity:0;visibility:hidden;transform:scale(.985);
+  transition:opacity .5s ease, transform .5s ease, visibility .5s;
   background:
-    radial-gradient(1200px 700px at 50% -10%, rgba(245,196,81,.07), transparent 60%),
-    radial-gradient(900px 600px at 90% 110%, rgba(59,130,246,.08), transparent 60%),
+    radial-gradient(1100px 640px at 50% -12%, rgba(245,196,81,.10), transparent 62%),
+    radial-gradient(840px 560px at 88% 116%, rgba(59,130,246,.10), transparent 60%),
+    radial-gradient(700px 500px at 6% 96%, rgba(168,85,247,.07), transparent 60%),
     linear-gradient(180deg,var(--bg2),var(--bg));
   overflow:hidden;
 }
-.slide.active{opacity:1;visibility:visible;transform:scale(1);z-index:2;}
-.slide.active .reveal{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
-.slide.active .reveal:nth-child(2){animation-delay:.06s}
-.slide.active .reveal:nth-child(3){animation-delay:.12s}
-.slide.active .reveal:nth-child(4){animation-delay:.18s}
-@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.slide.active{opacity:1;visibility:visible;transform:scale(1);z-index:2}
+.slide.active .reveal{animation:rise .65s cubic-bezier(.2,.7,.2,1) both}
+.slide.active .reveal:nth-child(2){animation-delay:.05s}
+.slide.active .reveal:nth-child(3){animation-delay:.1s}
+.slide.active .reveal:nth-child(4){animation-delay:.15s}
+.slide.active .reveal:nth-child(5){animation-delay:.2s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:62px 62px;mask-image:radial-gradient(1000px 620px at 50% 42%,#000,transparent 82%)}
 
-/* subtle grid texture */
-.slide::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:60px 60px;
-  mask-image:radial-gradient(900px 600px at 50% 40%,#000,transparent 80%);
-}
-
-/* ---------- typography ---------- */
-.eyebrow{font-family:'Sora';letter-spacing:.32em;text-transform:uppercase;font-size:clamp(10px,1vw,13px);color:var(--gold);font-weight:600}
-h1,h2,h3{font-family:'Sora';line-height:1.04;font-weight:800}
-.slide h2{font-size:clamp(26px,3.6vw,54px);letter-spacing:-.01em}
-.subhead{color:var(--muted);font-size:clamp(13px,1.4vw,18px);font-weight:400;margin-top:10px;max-width:62ch}
+/* typography */
+.eyebrow{font-family:'Sora';letter-spacing:.34em;text-transform:uppercase;font-size:clamp(10px,.85vw,13px);color:var(--gold);font-weight:600}
+h1,h2,h3{font-family:'Sora';line-height:1.03;font-weight:800}
+.slide h2{font-size:clamp(28px,3.5vw,56px);letter-spacing:-.012em;margin-top:8px}
+.subhead{color:var(--muted);font-size:clamp(13px,1.25vw,18px);font-weight:400;margin:12px auto 0;max-width:64ch;line-height:1.45}
 .gold{color:var(--gold)}
-.headwrap{position:relative;z-index:3;text-align:center;margin-bottom:clamp(16px,2.4vw,34px)}
+.tm{font-size:.5em;vertical-align:super;color:var(--gold2);font-weight:600}
+.headwrap{position:relative;z-index:3;text-align:center;flex:0 0 auto}
 
-/* ---------- logo ---------- */
-.logo{display:inline-flex;align-items:center;gap:14px;justify-content:center}
-.logo .mark{width:48px;height:48px;flex:0 0 auto}
-.logo .mark svg{width:100%;height:100%;display:block}
-.logo .name{font-family:'Sora';font-weight:700;letter-spacing:.18em;font-size:14px;line-height:1.2;text-align:left}
-.logo .name span{display:block;color:var(--muted);font-size:9px;letter-spacing:.4em}
+.body{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;min-height:0;position:relative;z-index:3;padding:clamp(14px,2.4vh,30px) 0}
+.tagline{position:relative;z-index:3;text-align:center;flex:0 0 auto;
+  font-family:'Sora';font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  font-size:clamp(11px,1.05vw,15px);color:var(--gold2)}
 
-/* ---------- panels / cards ---------- */
-.panel{
-  background:var(--panel);
-  border:1px solid var(--panel-brd);
-  border-radius:var(--radius);
-  backdrop-filter:blur(6px);
-  position:relative;z-index:3;
-}
-.glow-brd{box-shadow:inset 0 1px 0 rgba(255,255,255,.05), var(--shadow)}
-.grid{display:grid;gap:clamp(14px,1.6vw,22px);position:relative;z-index:3}
-.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
-
-/* footer tagline */
-.tagline{position:relative;z-index:3;text-align:center;margin-top:clamp(14px,2vw,26px);
-  font-family:'Sora';font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  font-size:clamp(11px,1.15vw,15px);color:var(--gold2)}
-
-/* engine list */
-.engine{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:14px;
-  border:1px solid var(--panel-brd);background:rgba(255,255,255,.025)}
-.engine .dot{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;font-size:20px}
-.engine h3{font-size:clamp(15px,1.5vw,20px);letter-spacing:.04em}
-.engine p{color:var(--muted);font-size:clamp(11px,1.05vw,13px);margin-top:2px}
-.b-learn{background:rgba(59,130,246,.16);color:var(--learn);box-shadow:0 0 0 1px rgba(59,130,246,.35)}
-.b-build{background:rgba(57,168,90,.16);color:var(--build);box-shadow:0 0 0 1px rgba(57,168,90,.35)}
-.b-create{background:rgba(168,85,247,.16);color:var(--create);box-shadow:0 0 0 1px rgba(168,85,247,.35)}
-.b-scale{background:rgba(240,145,31,.16);color:var(--scale);box-shadow:0 0 0 1px rgba(240,145,31,.35)}
-.b-impact{background:rgba(45,212,196,.16);color:var(--impact);box-shadow:0 0 0 1px rgba(45,212,196,.35)}
-
-ul.ticks{list-style:none;display:flex;flex-direction:column;gap:10px}
-ul.ticks li{display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-size:clamp(12px,1.15vw,15px)}
-ul.ticks li::before{content:"";width:18px;height:18px;flex:0 0 auto;margin-top:2px;border-radius:6px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
-  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;
-  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;}
-ul.x li::before{
-  background:rgba(255,255,255,.25);
-  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat;
-  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat;}
-ul.x li{color:var(--muted)}
-
-.card-h{font-family:'Sora';font-weight:700;font-size:clamp(16px,1.7vw,22px);letter-spacing:.03em}
-.card-sub{color:var(--muted);font-size:clamp(11px,1.1vw,14px);margin-top:4px}
-.kpi{font-family:'Sora';font-weight:800;font-size:clamp(30px,4vw,52px);
-  background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
-.kpi-label{color:var(--faint);text-transform:uppercase;letter-spacing:.22em;font-size:10px;font-weight:600;margin-bottom:6px}
-
-/* big number hero (the ask) */
-.ask{display:flex;align-items:center;justify-content:center;gap:clamp(18px,3vw,46px);flex-wrap:wrap}
-.ask .op{font-family:'Sora';font-size:clamp(34px,5vw,72px);font-weight:300;color:var(--faint)}
-.ask .num{font-family:'Sora';font-weight:800;font-size:clamp(48px,8vw,120px);line-height:.9;
-  background:linear-gradient(180deg,#fff 10%,var(--gold) 70%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
-.ask .cap{font-size:clamp(11px,1.1vw,14px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px;text-align:center}
-.ask .sub{color:var(--muted);font-size:clamp(11px,1.1vw,14px);margin-top:6px;max-width:24ch;text-align:center;font-weight:400}
-.ask-col{display:flex;flex-direction:column;align-items:center}
-
-.pillrow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.pill{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;border:1px solid var(--panel-brd);
-  background:rgba(255,255,255,.03);font-size:clamp(11px,1vw,13px);color:var(--ink);font-weight:500}
-.pill .pi{width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
-
-/* scenario cards */
-.scenario{padding:clamp(18px,2vw,30px);border-radius:var(--radius);border:1px solid var(--panel-brd);position:relative;overflow:hidden}
-.scenario.base{border-color:rgba(245,196,81,.45);background:rgba(245,196,81,.05)}
-.scenario .tag{font-family:'Sora';font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:12px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.scenario .row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid rgba(255,255,255,.07)}
-.scenario .row:first-of-type{border-top:none}
-.scenario .row .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
-.scenario .row .v{font-family:'Sora';font-weight:700;font-size:clamp(16px,1.7vw,24px)}
-.scenario .moic{color:var(--gold)}
-
-/* tranche timeline */
-.tranche{padding:clamp(16px,1.6vw,24px);border-radius:var(--radius);border:1px solid var(--panel-brd);position:relative;background:rgba(255,255,255,.02)}
-.tranche .top{height:4px;border-radius:4px;margin-bottom:16px}
-.tranche .name{font-family:'Sora';font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--muted)}
-.tranche .amt{font-family:'Sora';font-weight:800;font-size:clamp(24px,2.6vw,38px);margin:4px 0}
-.tranche .role{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px}
-.tranche ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.tranche li{font-size:clamp(11px,1.05vw,13px);color:var(--ink);padding-left:16px;position:relative}
-.tranche li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
-.tranche .when{margin-top:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-
-/* legend for donut */
-.legend{display:flex;flex-direction:column;gap:11px}
-.legend .li{display:flex;align-items:center;gap:12px;font-size:clamp(12px,1.1vw,15px)}
-.legend .sw{width:13px;height:13px;border-radius:4px;flex:0 0 auto}
-.legend .nm{flex:1;color:var(--ink)}
-.legend .vl{font-family:'Sora';font-weight:600;color:var(--muted)}
-
-/* nav */
-.hud{position:fixed;z-index:50;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;
-  padding:14px 22px;pointer-events:none}
-.hud .brand{font-family:'Sora';font-weight:700;letter-spacing:.18em;font-size:11px;color:var(--faint);text-transform:uppercase}
-.hud .ctrls{display:flex;align-items:center;gap:10px;pointer-events:auto}
-.nav-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--panel-brd);background:rgba(255,255,255,.04);
-  color:var(--ink);cursor:pointer;font-size:16px;display:grid;place-items:center;transition:.2s}
-.nav-btn:hover{background:rgba(245,196,81,.15);border-color:var(--gold)}
-.counter{font-family:'Sora';font-weight:600;font-size:13px;color:var(--muted);min-width:54px;text-align:center}
-.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-deep));z-index:60;transition:width .4s ease;box-shadow:0 0 12px rgba(245,196,81,.6)}
-
-/* dots */
-.dots{position:fixed;z-index:50;top:50%;right:18px;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px}
-.dots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.2);cursor:pointer;padding:0;transition:.25s}
-.dots button.on{background:var(--gold);transform:scale(1.35);box-shadow:0 0 10px var(--gold)}
-
-.hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:40;font-size:11px;color:var(--faint);letter-spacing:.08em;pointer-events:none;transition:opacity .6s}
-
-/* helpers */
-.center{text-align:center}
+.grid{display:grid;gap:clamp(16px,1.7vw,26px);width:100%}
+.fill{flex:1 1 auto;min-height:0}
 .two{grid-template-columns:1fr 1fr}
 .three{grid-template-columns:repeat(3,1fr)}
 .four{grid-template-columns:repeat(4,1fr)}
-.divider{width:1px;background:linear-gradient(180deg,transparent,var(--panel-brd),transparent)}
-.note{position:relative;z-index:3;margin-top:14px;color:var(--muted);font-size:clamp(11px,1.1vw,14px);text-align:center}
-.tm{font-size:.55em;vertical-align:super;color:var(--gold2);font-weight:600}
 
-@media (max-width:880px){
+.panel{background:var(--panel);border:1px solid var(--panel-brd);border-radius:var(--radius);backdrop-filter:blur(6px);position:relative}
+.glow{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--shadow)}
+.card{display:flex;flex-direction:column;padding:clamp(22px,2.4vw,40px)}
+.card.tall{justify-content:space-between}
+
+.card-h{font-family:'Sora';font-weight:700;font-size:clamp(18px,1.9vw,28px);letter-spacing:.02em;display:flex;align-items:center;gap:14px}
+.card-sub{color:var(--muted);font-size:clamp(12px,1.15vw,15px);margin-top:7px}
+.kpi-label{color:var(--faint);text-transform:uppercase;letter-spacing:.22em;font-size:clamp(9px,.8vw,11px);font-weight:600;margin-bottom:6px}
+.kpi{font-family:'Sora';font-weight:800;font-size:clamp(34px,4.4vw,60px);line-height:1;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.icon{width:clamp(44px,3.4vw,58px);height:clamp(44px,3.4vw,58px);border-radius:14px;display:grid;place-items:center;flex:0 0 auto;font-size:clamp(20px,1.9vw,26px)}
+.b-learn{background:rgba(59,130,246,.16);color:var(--learn);box-shadow:0 0 0 1px rgba(59,130,246,.4),0 0 24px rgba(59,130,246,.25)}
+.b-build{background:rgba(57,168,90,.16);color:var(--build);box-shadow:0 0 0 1px rgba(57,168,90,.4),0 0 24px rgba(57,168,90,.25)}
+.b-create{background:rgba(168,85,247,.16);color:var(--create);box-shadow:0 0 0 1px rgba(168,85,247,.4),0 0 24px rgba(168,85,247,.25)}
+.b-scale{background:rgba(240,145,31,.16);color:var(--scale);box-shadow:0 0 0 1px rgba(240,145,31,.4),0 0 24px rgba(240,145,31,.25)}
+.b-impact{background:rgba(45,212,196,.16);color:var(--impact);box-shadow:0 0 0 1px rgba(45,212,196,.4),0 0 24px rgba(45,212,196,.25)}
+
+ul.ticks{list-style:none;display:flex;flex-direction:column;gap:clamp(10px,1.4vh,16px)}
+ul.ticks li{display:flex;gap:13px;align-items:flex-start;font-size:clamp(13px,1.25vw,17px)}
+ul.ticks li::before{content:"";width:20px;height:20px;flex:0 0 auto;margin-top:1px;border-radius:7px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat}
+ul.x li{color:var(--muted)}
+ul.x li::before{background:rgba(255,255,255,.28);
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/></svg>") center/13px no-repeat}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:16px;justify-content:center}
+.logo .mark{width:54px;height:54px;flex:0 0 auto}
+.logo .name{font-family:'Sora';font-weight:700;letter-spacing:.2em;font-size:15px;line-height:1.25;text-align:left}
+.logo .name span{display:block;color:var(--muted);font-size:9px;letter-spacing:.42em;margin-top:2px}
+/* brand lockup (official logo) */
+.brandlock{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,1.6vh,18px)}
+.logomark{width:clamp(118px,14vw,200px);height:auto;filter:drop-shadow(0 10px 34px rgba(245,196,81,.30))}
+.wordmark{font-family:'Sora';font-weight:600;letter-spacing:.5em;font-size:clamp(36px,6.6vw,92px);line-height:1;
+  background:linear-gradient(180deg,#fbe9a8,#f2cd68 30%,#d3a03a 64%,#a8741a);-webkit-background-clip:text;background-clip:text;color:transparent;padding-left:.5em}
+.wordmark-sub{font-family:'Sora';font-weight:600;letter-spacing:.42em;text-transform:uppercase;font-size:clamp(11px,1.35vw,17px);color:var(--muted);padding-left:.42em}
+.hud .mini{width:20px;height:16px;vertical-align:-3px;margin-right:9px;filter:drop-shadow(0 2px 6px rgba(245,196,81,.4))}
+
+/* ===== SLIDE 2 — flywheel ===== */
+.flywheel{display:grid;grid-template-columns:1fr minmax(280px,420px) 1fr;align-items:center;gap:clamp(20px,3vw,60px);width:100%;height:100%}
+.callouts{display:flex;flex-direction:column;gap:clamp(16px,3vh,38px);justify-content:center}
+.callout{position:relative}
+.callout .ct{font-family:'Sora';font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:clamp(12px,1.1vw,15px)}
+.callout p{color:var(--muted);font-size:clamp(11px,1vw,13.5px);margin-top:4px;line-height:1.4}
+.callouts.r{text-align:left}.callouts.l{text-align:right}
+.ring-wrap{position:relative;display:grid;place-items:center;align-self:stretch}
+.ring-wrap svg.ring{position:absolute;inset:-6% -10%;width:120%;height:112%;pointer-events:none}
+.engines{display:flex;flex-direction:column;gap:clamp(9px,1.3vh,15px);width:100%;z-index:2;padding:clamp(18px,3vh,40px) 0}
+.eng{display:flex;align-items:center;gap:13px;padding:clamp(10px,1.3vh,15px) clamp(12px,1.2vw,18px);border-radius:14px;border:1px solid var(--panel-brd);background:rgba(10,16,32,.82);backdrop-filter:blur(4px)}
+.eng .icon{width:38px;height:38px;border-radius:11px;font-size:18px}
+.eng .et{font-family:'Sora';font-weight:700;font-size:clamp(13px,1.25vw,17px);letter-spacing:.04em}
+.eng .es{color:var(--muted);font-size:clamp(9px,.85vw,11px);letter-spacing:.12em;text-transform:uppercase}
+
+/* ===== SLIDE 3 — globe ===== */
+.globe-stage{display:grid;grid-template-columns:1fr minmax(320px,1.15fr) 1fr;align-items:center;gap:clamp(18px,2.4vw,46px);width:100%;height:100%}
+.vs-panel{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.globe-wrap{position:relative;display:grid;place-items:center;height:100%}
+.globe-wrap svg{width:100%;height:auto;max-height:62vh}
+
+/* the ask */
+.ask{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.6vw,44px);flex-wrap:wrap}
+.ask .op{font-family:'Sora';font-size:clamp(34px,4.6vw,70px);font-weight:300;color:var(--faint)}
+.ask .num{font-family:'Sora';font-weight:800;font-size:clamp(50px,7.4vw,116px);line-height:.88;background:linear-gradient(180deg,#fff 8%,var(--gold) 66%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ask .cap{font-size:clamp(11px,1.05vw,14px);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:10px;text-align:center}
+.ask .sub{color:var(--faint);font-size:clamp(11px,1vw,13px);margin-top:7px;max-width:22ch;text-align:center}
+.ask-col{display:flex;flex-direction:column;align-items:center}
+.pillrow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.pill{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--panel-brd);background:rgba(255,255,255,.03);font-size:clamp(12px,1.05vw,14px);font-weight:500}
+.pill .pi{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+.statband{display:flex;justify-content:center;gap:clamp(20px,4vw,72px);flex-wrap:wrap}
+.stat{text-align:center}
+.stat .v{font-family:'Sora';font-weight:800;font-size:clamp(24px,3vw,44px);background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{color:var(--muted);text-transform:uppercase;letter-spacing:.16em;font-size:clamp(9px,.82vw,12px);margin-top:6px}
+
+/* donut */
+.legend{display:flex;flex-direction:column;gap:clamp(9px,1.5vh,16px);justify-content:center}
+.legend .li{display:flex;align-items:center;gap:13px;font-size:clamp(12px,1.15vw,16px)}
+.legend .sw{width:14px;height:14px;border-radius:5px;flex:0 0 auto}
+.legend .nm{flex:1}
+.legend .vl{font-family:'Sora';font-weight:600;color:var(--muted);white-space:nowrap}
+
+/* scenario */
+.scenario{padding:clamp(20px,2.2vw,36px);border-radius:var(--radius);border:1px solid var(--panel-brd);display:flex;flex-direction:column;background:rgba(255,255,255,.02)}
+.scenario.base{border-color:rgba(245,196,81,.5);background:rgba(245,196,81,.055);box-shadow:0 0 40px rgba(245,196,81,.12)}
+.scenario .tag{font-family:'Sora';font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:clamp(12px,1.1vw,15px);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.scenario .row{display:flex;justify-content:space-between;align-items:baseline;padding:clamp(12px,1.6vh,18px) 0;border-top:1px solid rgba(255,255,255,.08)}
+.scenario .row:first-of-type{border-top:none}
+.scenario .k{color:var(--muted);font-size:clamp(11px,1vw,13px);text-transform:uppercase;letter-spacing:.1em}
+.scenario .v{font-family:'Sora';font-weight:700;font-size:clamp(18px,2vw,30px)}
+.scenario .moic{color:var(--gold)}
+
+/* tranche */
+.tranche{padding:clamp(18px,1.9vw,30px);border-radius:var(--radius);border:1px solid var(--panel-brd);display:flex;flex-direction:column;background:rgba(255,255,255,.02)}
+.tranche .top{height:5px;border-radius:5px;margin-bottom:18px}
+.tranche .name{font-family:'Sora';font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:clamp(11px,1vw,13px);color:var(--muted)}
+.tranche .amt{font-family:'Sora';font-weight:800;font-size:clamp(28px,3vw,46px);margin:6px 0}
+.tranche .role{font-size:clamp(10px,.9vw,12px);letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px}
+.tranche ul{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
+.tranche li{font-size:clamp(11px,1.05vw,14px);padding-left:18px;position:relative}
+.tranche li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.tranche .when{margin-top:18px;font-size:clamp(9px,.85vw,11px);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+
+.note{color:var(--muted);font-size:clamp(11px,1.05vw,14px);text-align:center;margin-top:14px}
+
+/* HUD */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-deep));z-index:60;transition:width .4s ease;box-shadow:0 0 12px rgba(245,196,81,.6)}
+.dots{position:fixed;z-index:50;top:50%;right:20px;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px}
+.dots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.2);cursor:pointer;padding:0;transition:.25s}
+.dots button.on{background:var(--gold);transform:scale(1.4);box-shadow:0 0 10px var(--gold)}
+.hud{position:fixed;z-index:50;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;pointer-events:none}
+.hud .brand{font-family:'Sora';font-weight:700;letter-spacing:.18em;font-size:11px;color:var(--faint);text-transform:uppercase}
+.hud .ctrls{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--panel-brd);background:rgba(255,255,255,.04);color:var(--ink);cursor:pointer;font-size:17px;display:grid;place-items:center;transition:.2s}
+.nav-btn:hover{background:rgba(245,196,81,.16);border-color:var(--gold)}
+.counter{font-family:'Sora';font-weight:600;font-size:13px;color:var(--muted);min-width:54px;text-align:center}
+.hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:40;font-size:11px;color:var(--faint);letter-spacing:.08em;pointer-events:none;transition:opacity .6s}
+
+@media (max-width:900px){
   .two,.three,.four{grid-template-columns:1fr}
+  .flywheel,.globe-stage{grid-template-columns:1fr}
+  .callouts,.vs-panel{display:none}
   .dots{display:none}
-  .engine p{display:none}
 }
 </style>
 </head>
@@ -208,163 +193,148 @@ ul.x li{color:var(--muted)}
 <div class="progress" id="progress"></div>
 <div class="deck" id="deck">
 
-  <!-- ============ SLIDE 1 — TITLE ============ -->
+  <!-- ============ 1 · TITLE ============ -->
   <section class="slide active">
-    <div class="body center" style="align-items:center">
-      <div class="reveal logo" style="margin-bottom:34px;transform:scale(1.4)">
-        <div class="mark">
-          <svg viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#c8881f"/></linearGradient></defs>
-          <path d="M50 8 L88 86 L66 86 L50 46 L34 86 L12 86 Z" fill="url(#g1)"/>
-          <circle cx="50" cy="60" r="5" fill="#05070d"/><rect x="46" y="66" width="8" height="20" rx="3" fill="#05070d"/>
-          </svg>
-        </div>
-        <div class="name">IMAGINE<br>GROUP AI<span>EST. THE AI ECONOMY</span></div>
+    <div class="body" style="align-items:center;text-align:center">
+      <div class="reveal brandlock" style="margin-bottom:clamp(20px,3vh,34px)">
+        <svg class="logomark" viewBox="0 0 100 80" aria-label="Imagine logo">
+          <defs><linearGradient id="goldA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe9a8"/><stop offset=".28" stop-color="#f2cd68"/><stop offset=".6" stop-color="#d3a03a"/><stop offset="1" stop-color="#a8741a"/></linearGradient></defs>
+          <path d="M50 2 L4 72 Q50 60 96 72 Z" fill="url(#goldA)"/>
+          <circle cx="50" cy="31" r="4.8" fill="url(#goldA)"/>
+          <rect x="46.6" y="40" width="6.8" height="27" rx="3.4" fill="url(#goldA)"/>
+        </svg>
+        <div class="wordmark">IMAGINE</div>
+        <div class="wordmark-sub">Group AI<span class="tm">™</span></div>
       </div>
-      <h1 class="reveal" style="font-size:clamp(40px,8vw,110px);background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em">IMAGINE<br>GROUP AI<span class="tm">™</span></h1>
-      <p class="reveal" style="font-family:'Sora';letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-size:clamp(13px,1.7vw,22px);margin-top:24px;font-weight:600">The Operating System<br>for the AI Economy</p>
+      <p class="reveal" style="font-family:'Sora';letter-spacing:.36em;text-transform:uppercase;color:var(--muted);font-size:clamp(13px,1.7vw,22px);margin-top:8px;font-weight:600">The Operating System for the AI Economy</p>
+      <div class="reveal statband" style="margin-top:clamp(34px,6vh,68px)">
+        <div class="stat"><div class="v">$24M</div><div class="l">Equity Raise</div></div>
+        <div class="stat"><div class="v">$118.5M</div><div class="l">FY2031 Revenue Target</div></div>
+        <div class="stat"><div class="v">10.7×</div><div class="l">Base-Case MOIC</div></div>
+      </div>
     </div>
     <div class="reveal tagline">One Ecosystem &nbsp;·&nbsp; Five Engines &nbsp;·&nbsp; Endless Possibilities</div>
   </section>
 
-  <!-- ============ SLIDE 2 — FIVE ENGINES ============ -->
+  <!-- ============ 2 · FIVE ENGINES (FLYWHEEL) ============ -->
   <section class="slide">
     <div class="headwrap reveal">
       <div class="eyebrow">The Platform</div>
       <h2>One Ecosystem. <span class="gold">Five Engines.</span></h2>
-      <p class="subhead" style="margin:10px auto 0">A vertically integrated platform that acquires talent, develops innovation, creates IP, scales through software, and reinvests impact.</p>
+      <p class="subhead">A vertically integrated platform that acquires talent, develops innovation, creates IP, scales through software, and reinvests impact.</p>
     </div>
-    <div class="body">
-      <div class="grid reveal" style="gap:12px">
-        <div class="engine"><div class="dot b-learn">◑</div><div><h3>LEARN — Hart Academy AI<span class="tm">™</span></h3><p>We educate — empowering the next generation with AI knowledge and skills.</p></div></div>
-        <div class="engine"><div class="dot b-build">◈</div><div><h3>BUILD — Imagine AI Labs<span class="tm">™</span></h3><p>We build — turning ideas into tools, solutions, and startups that solve real-world problems.</p></div></div>
-        <div class="engine"><div class="dot b-create">▶</div><div><h3>CREATE — Imagine Studios<span class="tm">™</span></h3><p>We create — transforming ideas into stories, content, and intellectual property that inspire.</p></div></div>
-        <div class="engine"><div class="dot b-scale">▲</div><div><h3>SCALE — Creative Intelligence<span class="tm">™</span></h3><p>We scale — intelligent systems that power businesses, industries, and the AI economy.</p></div></div>
-        <div class="engine"><div class="dot b-impact">♥</div><div><h3>IMPACT — JohnReinhard.org<span class="tm">™</span></h3><p>We impact — reinvesting success to uplift communities and create opportunity.</p></div></div>
+    <div class="body reveal">
+      <div class="flywheel">
+        <div class="callouts l">
+          <div class="callout"><div class="ct" style="color:var(--learn)">We Educate</div><p>Empowering the next generation with AI knowledge and skills.</p></div>
+          <div class="callout"><div class="ct" style="color:var(--build)">We Build</div><p>Turning ideas into tools, solutions, and startups that solve real-world problems.</p></div>
+          <div class="callout"><div class="ct" style="color:var(--create)">We Create</div><p>Transforming ideas into stories, content, and IP that inspire.</p></div>
+        </div>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 400 460" preserveAspectRatio="none"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset=".5" stop-color="#c8881f"/><stop offset="1" stop-color="#f5c451"/></linearGradient></defs>
+            <ellipse cx="200" cy="230" rx="186" ry="222" fill="none" stroke="url(#rg)" stroke-width="2.5" opacity=".85"/>
+            <ellipse cx="200" cy="230" rx="186" ry="222" fill="none" stroke="var(--gold)" stroke-width="9" opacity=".08"/>
+            <circle cx="200" cy="8" r="6" fill="var(--gold)"/><circle cx="200" cy="452" r="6" fill="var(--gold)"/>
+          </svg>
+          <div class="engines">
+            <div class="eng"><div class="icon b-learn">◑</div><div><div class="et">LEARN</div><div class="es">Hart Academy AI™</div></div></div>
+            <div class="eng"><div class="icon b-build">◈</div><div><div class="et">BUILD</div><div class="es">Imagine AI Labs™</div></div></div>
+            <div class="eng"><div class="icon b-create">▶</div><div><div class="et">CREATE</div><div class="es">Imagine Studios™</div></div></div>
+            <div class="eng"><div class="icon b-scale">▲</div><div><div class="et">SCALE</div><div class="es">Creative Intelligence™</div></div></div>
+            <div class="eng"><div class="icon b-impact">♥</div><div><div class="et">IMPACT</div><div class="es">JohnReinhard.org™</div></div></div>
+          </div>
+        </div>
+        <div class="callouts r">
+          <div class="callout"><div class="ct" style="color:var(--scale)">We Scale</div><p>Building intelligent systems that power businesses, industries, and the AI economy.</p></div>
+          <div class="callout"><div class="ct" style="color:var(--impact)">We Impact</div><p>Reinvesting our success to uplift communities and create opportunities for a better future.</p></div>
+        </div>
       </div>
     </div>
     <div class="reveal tagline">One Ecosystem. Endless Possibilities.</div>
   </section>
 
-  <!-- ============ SLIDE 3 — WHY THIS MODEL WINS ============ -->
+  <!-- ============ 3 · WHY THIS MODEL WINS (GLOBE) ============ -->
   <section class="slide">
     <div class="headwrap reveal">
       <div class="eyebrow">Why This Model Wins</div>
       <h2>The Compounding Power of <span class="gold">Integration</span></h2>
     </div>
-    <div class="body">
-      <div class="grid two reveal">
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
+    <div class="body reveal">
+      <div class="globe-stage">
+        <div class="vs-panel panel glow card" style="padding:clamp(20px,2.2vw,34px)">
           <div class="kpi-label" style="color:var(--faint)">Traditional Model</div>
-          <ul class="ticks x">
-            <li>One revenue stream</li>
-            <li>One market</li>
-            <li>Limited cross-sell</li>
-            <li>Higher acquisition cost</li>
-            <li>Linear growth</li>
-          </ul>
+          <ul class="ticks x"><li>One revenue stream</li><li>One market</li><li>Limited cross-sell</li><li>Higher acquisition cost</li><li>Linear growth</li></ul>
         </div>
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px);border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.04)">
+        <div class="globe-wrap"><svg id="globe" viewBox="0 0 460 460"></svg></div>
+        <div class="vs-panel panel glow card" style="padding:clamp(20px,2.2vw,34px);border-color:rgba(245,196,81,.4);background:rgba(245,196,81,.045)">
           <div class="kpi-label gold">Imagine Group AI</div>
-          <ul class="ticks">
-            <li>Shared audience</li>
-            <li>Shared IP &amp; shared data</li>
-            <li>Multiple revenue streams</li>
-            <li>Lower acquisition costs</li>
-            <li>Recurring revenue expansion</li>
-            <li><strong>Exponential growth</strong></li>
-          </ul>
+          <ul class="ticks"><li>Shared audience</li><li>Shared IP &amp; shared data</li><li>Multiple revenue streams</li><li>Lower acquisition costs</li><li>Recurring revenue expansion</li><li><strong>Exponential growth</strong></li></ul>
         </div>
       </div>
     </div>
     <div class="reveal tagline">One Ecosystem. Multiple Advantages. Compounding Value.</div>
   </section>
 
-  <!-- ============ SLIDE 4 — LEARN + BUILD ============ -->
+  <!-- ============ 4 · LEARN + BUILD ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Learn + Build</div>
-      <h2>The Foundation of Our <span class="gold">Ecosystem</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid two reveal">
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="card-h" style="color:var(--learn)">Hart Academy AI<span class="tm">™</span></div>
-          <div class="card-sub">Preparing the next generation of AI leaders.</div>
-          <div style="margin:18px 0">
-            <div class="kpi-label">FY2031 Revenue Target</div>
-            <div class="kpi">$28M</div>
-          </div>
-          <ul class="ticks"><li>Education &amp; training</li><li>Certification</li><li>Workforce development</li><li>Executive education</li><li>Global partnerships</li></ul>
-        </div>
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="card-h" style="color:var(--build)">Imagine AI Labs<span class="tm">™</span></div>
-          <div class="card-sub">Where ideas become reality.</div>
-          <div class="kpi-label" style="margin:18px 0 12px">Innovation engine for</div>
-          <ul class="ticks"><li>Innovation hubs</li><li>Startup incubation</li><li>R&amp;D partnerships</li><li>Enterprise collaboration</li><li>AI talent pipeline</li></ul>
-        </div>
+    <div class="headwrap reveal"><div class="eyebrow">Learn + Build</div><h2>The Foundation of Our <span class="gold">Ecosystem</span></h2></div>
+    <div class="body"><div class="grid two fill reveal">
+      <div class="panel glow card tall">
+        <div><div class="card-h"><span class="icon b-learn">◑</span><span style="color:var(--learn)">Hart Academy AI<span class="tm">™</span></span></div><div class="card-sub">Preparing the next generation of AI leaders.</div></div>
+        <div><div class="kpi-label">FY2031 Revenue Target</div><div class="kpi">$28M</div></div>
+        <ul class="ticks"><li>Education &amp; training</li><li>Certification</li><li>Workforce development</li><li>Executive education</li><li>Global partnerships</li></ul>
       </div>
-    </div>
+      <div class="panel glow card tall">
+        <div><div class="card-h"><span class="icon b-build">◈</span><span style="color:var(--build)">Imagine AI Labs<span class="tm">™</span></span></div><div class="card-sub">Where ideas become reality.</div></div>
+        <div class="kpi-label">Innovation engine for</div>
+        <ul class="ticks"><li>Innovation hubs</li><li>Startup incubation</li><li>R&amp;D partnerships</li><li>Enterprise collaboration</li><li>AI talent pipeline</li></ul>
+      </div>
+    </div></div>
     <div class="reveal tagline">Education Becomes Acquisition. Talent Becomes Innovation.</div>
   </section>
 
-  <!-- ============ SLIDE 5 — CREATE + SCALE ============ -->
+  <!-- ============ 5 · CREATE + SCALE ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Create + Scale</div>
-      <h2>From Imagination to <span class="gold">Intelligence at Scale</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid two reveal">
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="card-h" style="color:var(--create)">Imagine Studios<span class="tm">™</span></div>
-          <div class="card-sub">Where imagination meets intelligence.</div>
-          <div class="kpi-label" style="margin:18px 0 12px">Key outputs</div>
-          <ul class="ticks"><li>Film &amp; media</li><li>Branded content</li><li>Creator economy</li><li>Intellectual property</li><li>Digital experiences</li></ul>
-        </div>
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="card-h" style="color:var(--scale)">Creative Intelligence<span class="tm">™</span></div>
-          <div class="card-sub">Building the intelligence layer for the AI economy.</div>
-          <div style="margin:18px 0">
-            <div class="kpi-label">FY2031 Target — SaaS &amp; Agents</div>
-            <div class="kpi">$42M</div>
-          </div>
-          <ul class="ticks"><li>AI agents</li><li>SaaS platforms</li><li>Enterprise software</li><li>Data &amp; IP monetization</li><li>Recurring revenue</li></ul>
-        </div>
+    <div class="headwrap reveal"><div class="eyebrow">Create + Scale</div><h2>From Imagination to <span class="gold">Intelligence at Scale</span></h2></div>
+    <div class="body"><div class="grid two fill reveal">
+      <div class="panel glow card tall">
+        <div><div class="card-h"><span class="icon b-create">▶</span><span style="color:var(--create)">Imagine Studios<span class="tm">™</span></span></div><div class="card-sub">Where imagination meets intelligence.</div></div>
+        <div class="kpi-label">Key outputs</div>
+        <ul class="ticks"><li>Film &amp; media</li><li>Branded content</li><li>Creator economy</li><li>Intellectual property</li><li>Digital experiences</li></ul>
       </div>
-    </div>
+      <div class="panel glow card tall">
+        <div><div class="card-h"><span class="icon b-scale">▲</span><span style="color:var(--scale)">Creative Intelligence<span class="tm">™</span></span></div><div class="card-sub">Building the intelligence layer for the AI economy.</div></div>
+        <div><div class="kpi-label">FY2031 Target — SaaS &amp; Agents</div><div class="kpi">$42M</div></div>
+        <ul class="ticks"><li>AI agents</li><li>SaaS platforms</li><li>Enterprise software</li><li>Data &amp; IP monetization</li><li>Recurring revenue</li></ul>
+      </div>
+    </div></div>
     <div class="reveal tagline">Intellectual Property Becomes Recurring Revenue.</div>
   </section>
 
-  <!-- ============ SLIDE 6 — IMPACT ENGINE ============ -->
+  <!-- ============ 6 · IMPACT ENGINE ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Impact Engine</div>
-      <h2>Reinvesting Success. <span class="gold">Creating Lasting Change.</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid two reveal">
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="kpi-label gold">Economic Impact</div>
-          <ul class="ticks"><li>Jobs &amp; employment</li><li>Entrepreneurship</li><li>Workforce development</li><li>Local economic growth</li></ul>
-        </div>
-        <div class="panel glow-brd" style="padding:clamp(20px,2.4vw,34px)">
-          <div class="kpi-label" style="color:var(--impact)">Social Impact</div>
-          <ul class="ticks"><li>Education access</li><li>AI literacy</li><li>Community advancement</li><li>Opportunity creation</li></ul>
-        </div>
+    <div class="headwrap reveal"><div class="eyebrow">Impact Engine</div><h2>Reinvesting Success. <span class="gold">Creating Lasting Change.</span></h2></div>
+    <div class="body"><div class="grid fill reveal" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="panel glow card tall">
+        <div class="kpi-label gold">Economic Impact</div>
+        <ul class="ticks"><li>Jobs &amp; employment</li><li>Entrepreneurship</li><li>Workforce development</li><li>Local economic growth</li></ul>
       </div>
-      <div class="note reveal" style="margin-top:22px">
-        <strong style="color:var(--impact);font-family:'Sora';letter-spacing:.05em">JohnReinhard.org<span class="tm">™</span></strong> — Empowering human potential through education, opportunity, and innovation<span class="tm">™</span>
+      <div class="panel glow card" style="align-items:center;justify-content:center;text-align:center;border-color:rgba(45,212,196,.3)">
+        <div class="icon b-impact" style="width:74px;height:74px;border-radius:20px;font-size:34px;margin-bottom:18px">♥</div>
+        <div class="card-h" style="justify-content:center;color:var(--impact)">JohnReinhard.org<span class="tm">™</span></div>
+        <p class="card-sub" style="margin-top:12px;line-height:1.5">Empowering human potential through education, opportunity, and innovation<span class="tm">™</span></p>
       </div>
-    </div>
+      <div class="panel glow card tall">
+        <div class="kpi-label" style="color:var(--impact)">Social Impact</div>
+        <ul class="ticks"><li>Education access</li><li>AI literacy</li><li>Community advancement</li><li>Opportunity creation</li></ul>
+      </div>
+    </div></div>
     <div class="reveal tagline">Success Funds Future Opportunity.</div>
   </section>
 
-  <!-- ============ SLIDE 7 — THE ASK ============ -->
+  <!-- ============ 7 · THE ASK ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">The Ask</div>
-      <h2>Invest in the Future of the <span class="gold">AI Economy</span></h2>
-    </div>
+    <div class="headwrap reveal"><div class="eyebrow">The Ask</div><h2>Invest in the Future of the <span class="gold">AI Economy</span></h2></div>
     <div class="body">
       <div class="ask reveal">
         <div class="ask-col"><div class="num">$24M</div><div class="cap">Equity Raise</div><div class="sub">To build, scale, and lead the next era of creative intelligence.</div></div>
@@ -373,7 +343,7 @@ ul.x li{color:var(--muted)}
         <div class="op">=</div>
         <div class="ask-col"><div class="num">$28M</div><div class="cap">Total Financing Capacity</div></div>
       </div>
-      <div class="pillrow reveal" style="margin-top:34px">
+      <div class="pillrow reveal" style="margin-top:clamp(34px,6vh,64px)">
         <span class="pill"><span class="pi"></span>Milestone-based tranches</span>
         <span class="pill"><span class="pi"></span>Capital discipline</span>
         <span class="pill"><span class="pi"></span>De-risked execution</span>
@@ -383,107 +353,89 @@ ul.x li{color:var(--muted)}
     <div class="reveal tagline">Capital Will Be Deployed Against Milestones. Not Ambition.</div>
   </section>
 
-  <!-- ============ SLIDE 8 — USE OF PROCEEDS ============ -->
+  <!-- ============ 8 · USE OF PROCEEDS ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Use of Proceeds</div>
-      <h2>Building the <span class="gold">Platform Layer</span> for the AI Economy</h2>
-    </div>
-    <div class="body">
-      <div class="grid two reveal" style="align-items:center;grid-template-columns:.85fr 1.15fr">
-        <div style="display:grid;place-items:center">
-          <svg id="donut" viewBox="0 0 200 200" style="width:min(320px,70%);height:auto">
-            <g id="donutSegs" transform="rotate(-90 100 100)"></g>
-            <circle cx="100" cy="100" r="56" fill="#05070d"/>
-            <text x="100" y="94" text-anchor="middle" fill="#f5c451" font-family="Sora" font-weight="800" font-size="22">$24M</text>
-            <text x="100" y="114" text-anchor="middle" fill="#9aa3b2" font-family="Inter" font-size="9" letter-spacing="2">EQUITY RAISE</text>
-          </svg>
-        </div>
-        <div class="legend" id="legend"></div>
+    <div class="headwrap reveal"><div class="eyebrow">Use of Proceeds</div><h2>Building the <span class="gold">Platform Layer</span> for the AI Economy</h2></div>
+    <div class="body"><div class="grid fill reveal" style="grid-template-columns:.9fr 1.1fr;align-items:center">
+      <div style="display:grid;place-items:center">
+        <svg id="donut" viewBox="0 0 220 220" style="width:min(380px,90%);height:auto">
+          <g id="donutSegs" transform="rotate(-90 110 110)"></g>
+          <circle cx="110" cy="110" r="60" fill="#04060c"/>
+          <text x="110" y="103" text-anchor="middle" fill="#f5c451" font-family="Sora" font-weight="800" font-size="26">$24M</text>
+          <text x="110" y="125" text-anchor="middle" fill="#9aa3b4" font-family="Inter" font-size="10" letter-spacing="2.5">EQUITY RAISE</text>
+        </svg>
       </div>
-    </div>
+      <div class="legend" id="legend"></div>
+    </div></div>
     <div class="reveal tagline">60%+ of Capital Goes Directly Into People, Products, Curriculum &amp; IP.</div>
   </section>
 
-  <!-- ============ SLIDE 9 — GROWTH ROADMAP ============ -->
+  <!-- ============ 9 · GROWTH ROADMAP ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Growth Roadmap</div>
-      <h2>Projected <span class="gold">Revenue Growth</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid reveal" style="grid-template-columns:1.6fr .8fr;align-items:center;gap:clamp(18px,3vw,40px)">
-        <div class="panel glow-brd" style="padding:clamp(18px,2.2vw,30px)">
-          <svg id="chart" viewBox="0 0 560 320" style="width:100%;height:auto"></svg>
-        </div>
-        <div>
-          <div class="kpi-label">FY2031 Revenue Target</div>
-          <div class="kpi" style="font-size:clamp(36px,4.6vw,62px)">$118.5M</div>
-          <div style="margin-top:26px" class="kpi-label">Positive EBITDA Target</div>
-          <div class="kpi" style="font-size:clamp(30px,3.6vw,48px)">FY2030</div>
-          <div class="note" style="text-align:left;margin-top:18px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--gold2)">Scalable. Profitable. Impactful.</div>
-        </div>
+    <div class="headwrap reveal"><div class="eyebrow">Growth Roadmap</div><h2>Projected <span class="gold">Revenue Growth</span></h2></div>
+    <div class="body"><div class="grid fill reveal" style="grid-template-columns:1.7fr .8fr;align-items:center;gap:clamp(20px,3vw,48px)">
+      <div class="panel glow" style="padding:clamp(20px,2.4vw,38px);height:100%;display:flex;align-items:center"><svg id="chart" viewBox="0 0 600 360" style="width:100%;height:auto"></svg></div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3vh,34px)">
+        <div><div class="kpi-label">FY2031 Revenue Target</div><div class="kpi" style="font-size:clamp(40px,5vw,68px)">$118.5M</div></div>
+        <div><div class="kpi-label">Positive EBITDA Target</div><div class="kpi" style="font-size:clamp(32px,3.8vw,52px)">FY2030</div></div>
+        <div><div class="kpi-label">5-Year Revenue CAGR</div><div class="kpi" style="font-size:clamp(32px,3.8vw,52px)">~111%</div></div>
+        <div class="note" style="text-align:left;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2)">Scalable. Profitable. Impactful.</div>
       </div>
-    </div>
+    </div></div>
     <div class="reveal tagline">Growth Driven by Recurring Revenue and Platform Leverage.</div>
   </section>
 
-  <!-- ============ SLIDE 10 — CAPITAL DEPLOYMENT ============ -->
+  <!-- ============ 10 · CAPITAL DEPLOYMENT ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Capital Deployment Timeline</div>
-      <h2>Milestone-Based. <span class="gold">Disciplined. Strategic.</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid four reveal">
-        <div class="tranche"><div class="top" style="background:var(--learn)"></div><div class="name">Tranche A</div><div class="amt">$9M</div><div class="role">Foundation</div><ul><li>Governance &amp; legal</li><li>Academy launch</li><li>Studio operations</li><li>Enterprise pilots</li></ul><div class="when">0 – 12 months</div></div>
-        <div class="tranche"><div class="top" style="background:var(--build)"></div><div class="name">Tranche B</div><div class="amt">$8M</div><div class="role">Commercial Validation</div><ul><li>Certification engine</li><li>AI Labs expansion</li><li>SaaS development</li><li>Direct sales build</li></ul><div class="when">12 – 24 months</div></div>
-        <div class="tranche"><div class="top" style="background:var(--create)"></div><div class="name">Tranche C</div><div class="amt">$7M</div><div class="role">Scale Acceleration</div><ul><li>Strategic partnerships</li><li>Recurring revenue scale</li><li>International readiness</li><li>Brand expansion</li></ul><div class="when">24 – 36 months</div></div>
-        <div class="tranche" style="border-color:rgba(245,196,81,.4);background:rgba(245,196,81,.04)"><div class="top" style="background:var(--gold)"></div><div class="name">Optional Revolver</div><div class="amt">$4M</div><div class="role">Working Capital</div><ul><li>Growth capital</li><li>Cash flow flexibility</li></ul><div class="when">Ongoing</div></div>
-      </div>
-    </div>
+    <div class="headwrap reveal"><div class="eyebrow">Capital Deployment Timeline</div><h2>Milestone-Based. <span class="gold">Disciplined. Strategic.</span></h2></div>
+    <div class="body"><div class="grid four fill reveal">
+      <div class="tranche"><div class="top" style="background:var(--learn)"></div><div class="name">Tranche A</div><div class="amt">$9M</div><div class="role">Foundation</div><ul><li>Governance &amp; legal</li><li>Academy launch</li><li>Studio operations</li><li>Enterprise pilots</li></ul><div class="when">0 – 12 months</div></div>
+      <div class="tranche"><div class="top" style="background:var(--build)"></div><div class="name">Tranche B</div><div class="amt">$8M</div><div class="role">Commercial Validation</div><ul><li>Certification engine</li><li>AI Labs expansion</li><li>SaaS development</li><li>Direct sales build</li></ul><div class="when">12 – 24 months</div></div>
+      <div class="tranche"><div class="top" style="background:var(--create)"></div><div class="name">Tranche C</div><div class="amt">$7M</div><div class="role">Scale Acceleration</div><ul><li>Strategic partnerships</li><li>Recurring revenue scale</li><li>International readiness</li><li>Brand expansion</li></ul><div class="when">24 – 36 months</div></div>
+      <div class="tranche" style="border-color:rgba(245,196,81,.4);background:rgba(245,196,81,.045)"><div class="top" style="background:var(--gold)"></div><div class="name">Optional Revolver</div><div class="amt">$4M</div><div class="role">Working Capital</div><ul><li>Growth capital</li><li>Cash flow flexibility</li></ul><div class="when">Ongoing</div></div>
+    </div></div>
     <div class="reveal tagline">Each Tranche Unlocked by Measurable Milestones and KPIs.</div>
   </section>
 
-  <!-- ============ SLIDE 11 — RETURN SCENARIOS ============ -->
+  <!-- ============ 11 · RETURN SCENARIOS ============ -->
   <section class="slide">
-    <div class="headwrap reveal">
-      <div class="eyebrow">Investor Return Scenarios</div>
-      <h2>Multiple Paths to <span class="gold">Significant Value Creation</span></h2>
-    </div>
-    <div class="body">
-      <div class="grid three reveal">
-        <div class="scenario"><div class="tag" style="color:var(--build)">◍ Conservative</div>
-          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$82M</span></div>
-          <div class="row"><span class="k">Exit Value</span><span class="v">$328M</span></div>
-          <div class="row"><span class="k">Investor Return</span><span class="v moic">4.5×</span></div>
-        </div>
-        <div class="scenario base"><div class="tag gold">★ Base Case</div>
-          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$118.5M</span></div>
-          <div class="row"><span class="k">Exit Value</span><span class="v">$770M</span></div>
-          <div class="row"><span class="k">Investor Return</span><span class="v moic">10.7×</span></div>
-        </div>
-        <div class="scenario"><div class="tag" style="color:var(--scale)">▲ Upside</div>
-          <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$165M+</span></div>
-          <div class="row"><span class="k">Exit Value</span><span class="v">$1.4B+</span></div>
-          <div class="row"><span class="k">Investor Return</span><span class="v moic">19.5×</span></div>
-        </div>
+    <div class="headwrap reveal"><div class="eyebrow">Investor Return Scenarios</div><h2>Multiple Paths to <span class="gold">Significant Value Creation</span></h2></div>
+    <div class="body"><div class="grid three fill reveal">
+      <div class="scenario"><div class="tag" style="color:var(--build)">◍ Conservative</div>
+        <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$82M</span></div>
+        <div class="row"><span class="k">Exit Value</span><span class="v">$328M</span></div>
+        <div class="row"><span class="k">Investor Return</span><span class="v moic">4.5×</span></div>
       </div>
-      <div class="note reveal">MOIC = Multiple on Invested Capital</div>
-    </div>
+      <div class="scenario base"><div class="tag gold">★ Base Case</div>
+        <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$118.5M</span></div>
+        <div class="row"><span class="k">Exit Value</span><span class="v">$770M</span></div>
+        <div class="row"><span class="k">Investor Return</span><span class="v moic">10.7×</span></div>
+      </div>
+      <div class="scenario"><div class="tag" style="color:var(--scale)">▲ Upside</div>
+        <div class="row"><span class="k">FY2031 Revenue</span><span class="v">$165M+</span></div>
+        <div class="row"><span class="k">Exit Value</span><span class="v">$1.4B+</span></div>
+        <div class="row"><span class="k">Investor Return</span><span class="v moic">19.5×</span></div>
+      </div>
+    </div></div>
     <div class="reveal tagline">The Goal Is Migration Toward Recurring Software &amp; Platform Economics.</div>
   </section>
 
-  <!-- ============ SLIDE 12 — CLOSING ============ -->
+  <!-- ============ 12 · CLOSING ============ -->
   <section class="slide">
-    <div class="body center" style="align-items:center">
-      <div class="reveal logo" style="margin-bottom:30px;transform:scale(1.3)">
-        <div class="mark"><svg viewBox="0 0 100 100"><path d="M50 8 L88 86 L66 86 L50 46 L34 86 L12 86 Z" fill="url(#g1)"/><circle cx="50" cy="60" r="5" fill="#05070d"/><rect x="46" y="66" width="8" height="20" rx="3" fill="#05070d"/></svg></div>
-        <div class="name">IMAGINE<br>GROUP AI<span>THE AI ECONOMY</span></div>
+    <div class="body" style="align-items:center;text-align:center">
+      <div class="reveal brandlock" style="margin-bottom:clamp(18px,2.6vh,30px)">
+        <svg class="logomark" viewBox="0 0 100 80" style="width:clamp(96px,11vw,150px)" aria-label="Imagine logo">
+          <defs><linearGradient id="goldB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe9a8"/><stop offset=".28" stop-color="#f2cd68"/><stop offset=".6" stop-color="#d3a03a"/><stop offset="1" stop-color="#a8741a"/></linearGradient></defs>
+          <path d="M50 2 L4 72 Q50 60 96 72 Z" fill="url(#goldB)"/>
+          <circle cx="50" cy="31" r="4.8" fill="url(#goldB)"/>
+          <rect x="46.6" y="40" width="6.8" height="27" rx="3.4" fill="url(#goldB)"/>
+        </svg>
+        <div class="wordmark" style="font-size:clamp(28px,4.4vw,56px)">IMAGINE</div>
+        <div class="wordmark-sub">Group AI<span class="tm">™</span></div>
       </div>
-      <h2 class="reveal" style="font-size:clamp(28px,4.4vw,64px);line-height:1.1">One Ecosystem.<br>Multiple Revenue Engines.<br><span class="gold">Scalable AI Infrastructure.</span><br>Measurable Social Impact.</h2>
-      <p class="reveal subhead" style="margin:24px auto 0;font-size:clamp(15px,1.8vw,22px);color:var(--gold2)">Seeking <strong style="color:var(--gold)">$24M</strong> to build the platform layer for the AI economy.</p>
-      <div class="reveal pillrow" style="margin-top:30px">
+      <h2 class="reveal" style="font-size:clamp(30px,4.4vw,66px);line-height:1.1">One Ecosystem.<br>Multiple Revenue Engines.<br><span class="gold">Scalable AI Infrastructure.</span><br>Measurable Social Impact.</h2>
+      <p class="reveal subhead" style="font-size:clamp(15px,1.8vw,22px);color:var(--gold2)">Seeking <strong style="color:var(--gold)">$24M</strong> to build the platform layer for the AI economy.</p>
+      <div class="reveal pillrow" style="margin-top:clamp(28px,5vh,52px)">
         <span class="pill"><span class="pi" style="background:var(--learn)"></span>Learn</span>
         <span class="pill"><span class="pi" style="background:var(--build)"></span>Build</span>
         <span class="pill"><span class="pi" style="background:var(--create)"></span>Create</span>
@@ -496,107 +448,117 @@ ul.x li{color:var(--muted)}
 
 </div>
 
-<!-- HUD -->
 <div class="dots" id="dots"></div>
 <div class="hud">
-  <div class="brand">IMAGINE GROUP AI™ · Investor Pitch</div>
-  <div class="ctrls">
-    <button class="nav-btn" id="prev" aria-label="Previous">‹</button>
-    <div class="counter"><span id="cur">1</span> / <span id="tot">12</span></div>
-    <button class="nav-btn" id="next" aria-label="Next">›</button>
-  </div>
+  <div class="brand"><svg class="mini" viewBox="0 0 100 80"><path d="M50 2 L4 72 Q50 60 96 72 Z" fill="url(#goldA)"/><circle cx="50" cy="31" r="4.8" fill="url(#goldA)"/><rect x="46.6" y="40" width="6.8" height="27" rx="3.4" fill="url(#goldA)"/></svg>IMAGINE GROUP AI™ · Investor Pitch</div>
+  <div class="ctrls"><button class="nav-btn" id="prev">‹</button><div class="counter"><span id="cur">1</span> / <span id="tot">12</span></div><button class="nav-btn" id="next">›</button></div>
 </div>
-<div class="hint" id="hint">Use ← → arrow keys, click, or swipe to navigate · Press F for fullscreen</div>
+<div class="hint" id="hint">← → arrows · click · swipe to navigate &nbsp;·&nbsp; press F for fullscreen</div>
 
 <script>
 (function(){
-  const slides=[...document.querySelectorAll('.slide')];
-  const total=slides.length;
+  const NS='http://www.w3.org/2000/svg';
+  const ENG=[{k:'LEARN',c:'#3b82f6',g:'◑'},{k:'BUILD',c:'#39a85a',g:'◈'},{k:'CREATE',c:'#a855f7',g:'▶'},{k:'SCALE',c:'#f0911f',g:'▲'},{k:'IMPACT',c:'#2dd4c4',g:'♥'}];
+
+  /* ---- navigation ---- */
+  const slides=[...document.querySelectorAll('.slide')], total=slides.length;
   let i=0;
   const cur=document.getElementById('cur'), prog=document.getElementById('progress');
   document.getElementById('tot').textContent=total;
-
-  // dots
   const dotsEl=document.getElementById('dots');
-  slides.forEach((_,n)=>{const b=document.createElement('button');b.onclick=()=>go(n);dotsEl.appendChild(b);});
+  slides.forEach((_,n)=>{const b=document.createElement('button');b.onclick=e=>{e.stopPropagation();go(n);};dotsEl.appendChild(b);});
   const dots=[...dotsEl.children];
-
-  function go(n){
-    i=Math.max(0,Math.min(total-1,n));
-    slides.forEach((s,n2)=>s.classList.toggle('active',n2===i));
-    dots.forEach((d,n2)=>d.classList.toggle('on',n2===i));
-    cur.textContent=i+1;
-    prog.style.width=((i+1)/total*100)+'%';
-  }
-  document.getElementById('next').onclick=()=>go(i+1);
-  document.getElementById('prev').onclick=()=>go(i-1);
+  function go(n){i=Math.max(0,Math.min(total-1,n));slides.forEach((s,m)=>s.classList.toggle('active',m===i));dots.forEach((d,m)=>d.classList.toggle('on',m===i));cur.textContent=i+1;prog.style.width=((i+1)/total*100)+'%';}
+  document.getElementById('next').onclick=e=>{e.stopPropagation();go(i+1);};
+  document.getElementById('prev').onclick=e=>{e.stopPropagation();go(i-1);};
   document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(i+1);
-    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
-    else if(e.key==='Home')go(0);
-    else if(e.key==='End')go(total-1);
-    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+    if(['ArrowRight','PageDown',' '].includes(e.key))go(i+1);
+    else if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);
+    else if(e.key==='Home')go(0);else if(e.key==='End')go(total-1);
+    else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
   });
-  // click to advance (ignore controls)
-  document.getElementById('deck').addEventListener('click',e=>{
-    if(e.target.closest('.nav-btn, .dots, a, button'))return;
-    const x=e.clientX/window.innerWidth;
-    go(x<0.28?i-1:i+1);
-  });
-  // swipe
-  let sx=0;
-  addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  document.getElementById('deck').addEventListener('click',e=>{if(e.target.closest('.nav-btn,.dots,a'))return;go(e.clientX/innerWidth<0.28?i-1:i+1);});
+  let sx=0;addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
   addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?i+1:i-1);},{passive:true});
   setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
 
-  // ---- DONUT (slide 8) ----
-  const data=[
-    {nm:'Hiring & Payroll',v:9.8,p:41,c:'#c8881f'},
-    {nm:'Product / Curriculum / IP',v:4.6,p:19,c:'#39a85a'},
-    {nm:'Sales & Marketing',v:3.8,p:16,c:'#3b82f6'},
-    {nm:'Working Capital',v:1.8,p:7,c:'#a855f7'},
-    {nm:'Infrastructure & Cloud',v:1.6,p:7,c:'#2dd4c4'},
-    {nm:'Legal & Compliance',v:1.5,p:6,c:'#f0911f'},
-    {nm:'Equipment & CapEx',v:0.9,p:4,c:'#e05a5a'},
-  ];
-  const segG=document.getElementById('donutSegs');
-  const R=82, C=2*Math.PI*R; let off=0;
-  data.forEach(d=>{
-    const len=C*d.p/100;
-    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    c.setAttribute('cx',100);c.setAttribute('cy',100);c.setAttribute('r',R);
-    c.setAttribute('fill','none');c.setAttribute('stroke',d.c);c.setAttribute('stroke-width',30);
-    c.setAttribute('stroke-dasharray',(len-2)+' '+(C-len+2));
-    c.setAttribute('stroke-dashoffset',-off);
-    segG.appendChild(c);
-    off+=len;
-  });
-  const leg=document.getElementById('legend');
-  data.forEach(d=>{
-    const r=document.createElement('div');r.className='li';
-    r.innerHTML=`<span class="sw" style="background:${d.c}"></span><span class="nm">${d.nm}</span><span class="vl">$${d.v}M · ${d.p}%</span>`;
-    leg.appendChild(r);
-  });
+  /* ---- GLOBE (slide 3) ---- */
+  (function(){
+    const svg=document.getElementById('globe'), cx=230,cy=230,gR=120,nR=192;
+    const pos=t=>({x:cx+nR*Math.sin(t*Math.PI/180),y:cy-nR*Math.cos(t*Math.PI/180)});
+    let h=`<defs>
+      <radialGradient id="earth" cx="42%" cy="38%" r="75%">
+        <stop offset="0" stop-color="#1b3a6b"/><stop offset="45%" stop-color="#0d1f3d"/><stop offset="100%" stop-color="#060b18"/>
+      </radialGradient>
+      <radialGradient id="cities" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#f5c451" stop-opacity=".55"/><stop offset="55%" stop-color="#e0a93b" stop-opacity=".12"/><stop offset="100%" stop-color="#e0a93b" stop-opacity="0"/>
+      </radialGradient>
+      <marker id="ah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#f5c451"/></marker>
+    </defs>`;
+    h+=`<circle cx="${cx}" cy="${cy}" r="${nR+24}" fill="url(#cities)"/>`;
+    h+=`<circle cx="${cx}" cy="${cy}" r="${gR}" fill="url(#earth)" stroke="rgba(245,196,81,.22)" stroke-width="1"/>`;
+    // meridians / latitudes
+    for(let k=-2;k<=2;k++){const rx=gR*Math.cos(k*0.62);h+=`<ellipse cx="${cx}" cy="${cy}" rx="${Math.abs(rx).toFixed(1)}" ry="${gR}" fill="none" stroke="rgba(120,170,255,.16)" stroke-width="1"/>`;}
+    for(let k=1;k<=2;k++){const ry=gR*Math.cos(k*0.62);h+=`<ellipse cx="${cx}" cy="${cy}" rx="${gR}" ry="${ry.toFixed(1)}" fill="none" stroke="rgba(120,170,255,.13)" stroke-width="1"/>`;}
+    h+=`<line x1="${cx}" y1="${cy-gR}" x2="${cx}" y2="${cy+gR}" stroke="rgba(120,170,255,.16)"/><line x1="${cx-gR}" y1="${cy}" x2="${cx+gR}" y2="${cy}" stroke="rgba(120,170,255,.13)"/>`;
+    // city light dots
+    const dots=[[-40,-35],[20,-50],[55,-10],[10,30],[-30,40],[-60,5],[35,35],[-10,-15],[60,-40]];
+    dots.forEach(([dx,dy])=>{if(dx*dx+dy*dy<gR*gR*.7)h+=`<circle cx="${cx+dx}" cy="${cy+dy}" r="1.6" fill="#f5c451" opacity=".8"/>`;});
+    // cycle arrows between nodes
+    for(let n=0;n<5;n++){const a=n*72+15,b=(n+1)*72-15;const p1=pos(a),p2=pos(b);
+      h+=`<path d="M${p1.x.toFixed(1)} ${p1.y.toFixed(1)} A ${nR} ${nR} 0 0 1 ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}" fill="none" stroke="#f5c451" stroke-width="2.4" opacity=".8" marker-end="url(#ah)"/>`;}
+    // nodes
+    ENG.forEach((e,n)=>{const p=pos(n*72);
+      h+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="26" fill="#070d1c" stroke="${e.c}" stroke-width="2.5"/>`;
+      h+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="26" fill="${e.c}" opacity=".14"/>`;
+      h+=`<text x="${p.x.toFixed(1)}" y="${(p.y+6).toFixed(1)}" text-anchor="middle" font-size="20" fill="${e.c}">${e.g}</text>`;
+      const lp=pos(n*72), out=nR+44, lx=cx+out*Math.sin(n*72*Math.PI/180), ly=cy-out*Math.cos(n*72*Math.PI/180);
+      h+=`<text x="${lx.toFixed(1)}" y="${(ly+4).toFixed(1)}" text-anchor="middle" font-family="Sora" font-weight="700" font-size="14" letter-spacing="1.5" fill="#f5f2ea">${e.k}</text>`;
+    });
+    svg.innerHTML=h;
+  })();
 
-  // ---- LINE CHART (slide 9) ----
-  const pts=[{y:'FY27',v:5.9},{y:'FY28',v:16.7},{y:'FY29',v:36.5},{y:'FY30',v:72.5},{y:'FY31',v:118.5}];
-  const svg=document.getElementById('chart');
-  const W=560,H=320,pad={l:54,r:24,t:24,b:44};
-  const max=120;
-  const xs=v=>pad.l+(W-pad.l-pad.r)*(v/(pts.length-1));
-  const ys=v=>H-pad.b-(H-pad.t-pad.b)*(v/max);
-  let g='';
-  [0,40,80,120].forEach(t=>{g+=`<line x1="${pad.l}" y1="${ys(t)}" x2="${W-pad.r}" y2="${ys(t)}" stroke="rgba(255,255,255,.08)"/><text x="${pad.l-10}" y="${ys(t)+4}" fill="#6b7384" font-size="11" text-anchor="end" font-family="Inter">$${t}M</text>`;});
-  let line='', area='';
-  pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);line+=(n?'L':'M')+x+' '+y+' ';area+=(n?'L':'M')+x+' '+y+' ';});
-  area+=`L${xs(pts.length-1)} ${ys(0)} L${xs(0)} ${ys(0)} Z`;
-  g+=`<defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c451" stop-opacity=".35"/><stop offset="1" stop-color="#f5c451" stop-opacity="0"/></linearGradient></defs>`;
-  g+=`<path d="${area}" fill="url(#ar)"/><path d="${line}" fill="none" stroke="#f5c451" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-  pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);
-    g+=`<circle cx="${x}" cy="${y}" r="5.5" fill="#05070d" stroke="#f5c451" stroke-width="3"/>`;
-    g+=`<text x="${x}" y="${y-14}" fill="#f4f1e9" font-size="12" font-weight="700" text-anchor="middle" font-family="Sora">$${p.v}M</text>`;
-    g+=`<text x="${x}" y="${H-pad.b+22}" fill="#9aa3b2" font-size="11" text-anchor="middle" font-family="Inter">${p.y}</text>`;});
-  svg.innerHTML=g;
+  /* ---- DONUT (slide 8) ---- */
+  (function(){
+    const data=[
+      {nm:'Hiring & Payroll',v:9.8,p:41,c:'#c8881f'},
+      {nm:'Product / Curriculum / IP',v:4.6,p:19,c:'#39a85a'},
+      {nm:'Sales & Marketing',v:3.8,p:16,c:'#3b82f6'},
+      {nm:'Working Capital',v:1.8,p:7,c:'#a855f7'},
+      {nm:'Infrastructure & Cloud',v:1.6,p:7,c:'#2dd4c4'},
+      {nm:'Legal & Compliance',v:1.5,p:6,c:'#f0911f'},
+      {nm:'Equipment & CapEx',v:0.9,p:4,c:'#e05a5a'}];
+    const segG=document.getElementById('donutSegs'), R=88, C=2*Math.PI*R; let off=0;
+    data.forEach(d=>{const len=C*d.p/100;const c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',110);c.setAttribute('cy',110);c.setAttribute('r',R);c.setAttribute('fill','none');
+      c.setAttribute('stroke',d.c);c.setAttribute('stroke-width',32);
+      c.setAttribute('stroke-dasharray',(len-2.5)+' '+(C-len+2.5));c.setAttribute('stroke-dashoffset',-off);
+      segG.appendChild(c);off+=len;});
+    const leg=document.getElementById('legend');
+    data.forEach(d=>{const r=document.createElement('div');r.className='li';
+      r.innerHTML=`<span class="sw" style="background:${d.c}"></span><span class="nm">${d.nm}</span><span class="vl">$${d.v}M · ${d.p}%</span>`;leg.appendChild(r);});
+  })();
+
+  /* ---- LINE CHART (slide 9) ---- */
+  (function(){
+    const pts=[{y:'FY27',v:5.9},{y:'FY28',v:16.7},{y:'FY29',v:36.5},{y:'FY30',v:72.5},{y:'FY31',v:118.5}];
+    const W=600,H=360,pad={l:60,r:28,t:30,b:48},max=120;
+    const xs=v=>pad.l+(W-pad.l-pad.r)*(v/(pts.length-1)), ys=v=>H-pad.b-(H-pad.t-pad.b)*(v/max);
+    let g='';
+    [0,40,80,120].forEach(t=>{g+=`<line x1="${pad.l}" y1="${ys(t)}" x2="${W-pad.r}" y2="${ys(t)}" stroke="rgba(255,255,255,.08)"/><text x="${pad.l-12}" y="${ys(t)+4}" fill="#6b7484" font-size="12" text-anchor="end" font-family="Inter">$${t}M</text>`;});
+    // bars
+    pts.forEach((p,n)=>{const x=xs(n);g+=`<rect x="${x-13}" y="${ys(p.v)}" width="26" height="${ys(0)-ys(p.v)}" rx="5" fill="#f5c451" opacity=".10"/>`;});
+    let line='',area='';
+    pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);line+=(n?'L':'M')+x+' '+y+' ';area+=(n?'L':'M')+x+' '+y+' ';});
+    area+=`L${xs(pts.length-1)} ${ys(0)} L${xs(0)} ${ys(0)} Z`;
+    g+=`<defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c451" stop-opacity=".38"/><stop offset="1" stop-color="#f5c451" stop-opacity="0"/></linearGradient></defs>`;
+    g+=`<path d="${area}" fill="url(#ar)"/><path d="${line}" fill="none" stroke="#f5c451" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach((p,n)=>{const x=xs(n),y=ys(p.v);
+      g+=`<circle cx="${x}" cy="${y}" r="6" fill="#04060c" stroke="#f5c451" stroke-width="3"/>`;
+      g+=`<text x="${x}" y="${y-16}" fill="#f5f2ea" font-size="13" font-weight="700" text-anchor="middle" font-family="Sora">$${p.v}M</text>`;
+      g+=`<text x="${x}" y="${H-pad.b+24}" fill="#9aa3b4" font-size="12" text-anchor="middle" font-family="Inter">${p.y}</text>`;});
+    document.getElementById('chart').innerHTML=g;
+  })();
 
   go(0);
 })();
