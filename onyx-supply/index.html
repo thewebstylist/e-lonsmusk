@@ -349,7 +349,10 @@ footer{border-top:1px solid var(--concrete);padding:34px 4vw 44px;display:flex;f
 <!-- ============ HERO — SCROLL-SCRUBBED WALK ============ -->
 <div class="hero-track" id="top">
   <div class="hero-stage">
-    <video id="heroVideo" src="media/hero.mp4" muted playsinline preload="auto"></video>
+    <video id="heroVideo" muted playsinline preload="auto">
+      <source src="media/hero.mp4" type="video/mp4" />
+      <source src="media/hero.webm" type="video/webm" />
+    </video>
     <div class="hero-shade"></div>
     <div class="hero-copy">
       <div class="hero-kicker">Rooftop transmission · 00:00 · Drop 001</div>
@@ -393,7 +396,10 @@ footer{border-top:1px solid var(--concrete);padding:34px 4vw 44px;display:flex;f
 <!-- ============ FABRIC MACRO / MANIFESTO ============ -->
 <section id="fabric">
   <div class="fabric-wrap">
-    <video id="macroVideo" src="media/macro.mp4" muted playsinline loop preload="metadata"></video>
+    <video id="macroVideo" muted playsinline loop preload="metadata">
+      <source src="media/macro.mp4" type="video/mp4" />
+      <source src="media/macro.webm" type="video/webm" />
+    </video>
     <div class="fabric-shade"></div>
     <div class="manifesto rv">
       <div class="sec-index" style="margin-bottom:20px">002 / CONSTRUCTION</div>
@@ -474,23 +480,25 @@ const PRODUCTS = [
   {
     id:'hoodie', num:'01', name:'Heavyweight Hoodie', price:180,
     desc:'520 GSM brushed fleece. Standing hood, chrome pulls, dropped shoulder. Heavy enough to hang straight.',
-    video:'media/spin-hoodie.mp4',
+    video:'media/spin-hoodie',
     sizes:['XS','S','M','L','XL','XXL'], soldOut:['L','XXL']
   },
   {
     id:'cargo', num:'02', name:'Cargo Pants', price:210,
     desc:'4-way ripstop, eight pockets, bar-tacked joints. Chrome zips on every flap. Cinched cuff, wide stack.',
-    video:'media/spin-cargo.mp4',
+    video:'media/spin-cargo',
     sizes:['28','30','32','34','36','38'], soldOut:['32']
   },
   {
     id:'puffer', num:'03', name:'Chrome-Accent Puffer', price:340,
     desc:'700-fill down in a matte shell. Mirror-polished chrome zipper tape runs collar to hem. Cropped, boxed, loud in silence.',
-    video:'media/spin-puffer.mp4',
+    video:'media/spin-puffer',
     sizes:['XS','S','M','L','XL'], soldOut:['M','XL']
   }
 ];
 const fmt = n => '$' + n.toLocaleString('en-US');
+/* dual-source markup: H.264 MP4 first for broad support, VP9 WebM fallback */
+const srcs = base => `<source src="${base}.mp4" type="video/mp4" /><source src="${base}.webm" type="video/webm" />`;
 
 /* ================= MARQUEES ================= */
 const MQ = `<span>Heavyweight Hoodie <i>$180</i></span><span class="alt">Cargo Pants <i>$210</i></span><span>Chrome-Accent Puffer <i>$340</i></span><span class="alt">Midnight Drop</span><span>Built Heavy — Cut Clean</span><span class="alt">Small Runs Only</span>`;
@@ -507,7 +515,7 @@ PRODUCTS.forEach(p => {
   card.dataset.id = p.id;
   card.innerHTML = `
     <div class="card-media">
-      <video src="${p.video}" muted playsinline loop preload="auto"></video>
+      <video muted playsinline loop preload="auto">${srcs(p.video)}</video>
       <span class="play-tag">Hover · 360°</span>
       <span class="card-num">${p.num}</span>
     </div>
@@ -617,7 +625,7 @@ function renderCart() {
   if (!n) { items.innerHTML = '<div class="d-empty">Cart is empty — the fog waits.</div>'; subEl.textContent = '$0'; return; }
   items.innerHTML = cart.map((i,idx) => `
     <div class="d-item">
-      <video class="d-thumb" src="${i.video}" muted playsinline preload="metadata"></video>
+      <video class="d-thumb" muted playsinline preload="metadata">${srcs(i.video)}</video>
       <div>
         <div class="d-name">${i.name}</div>
         <div class="d-meta">SIZE ${i.size} — ${fmt(i.price)}</div>
