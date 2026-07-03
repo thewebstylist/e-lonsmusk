@@ -6,6 +6,11 @@ name: Fetch ONYX media assets
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "claude/onyx-midnight-drop-site-gb5sgx" ]
+    paths:
+      - "onyx-supply/media-manifest.txt"
+      - ".github/workflows/fetch-onyx-media.yml"
 
 permissions:
   contents: write
