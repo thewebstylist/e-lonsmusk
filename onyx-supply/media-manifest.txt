@@ -1,1 +1,6 @@
 lookbook.png|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_201917_5e51d8e2-d807-430f-80d2-74348a445c45.png
+hero.mp4|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_202446_45f8122f-cbea-4e46-9fa9-a32f84054363.mp4
+spin-hoodie.mp4|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_202427_5bbc2a39-a0e3-4b1e-b2a7-effbc2549856.mp4
+spin-cargo.mp4|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_202429_701346db-d4bd-4501-be28-b8d637ba9f43.mp4
+spin-puffer.mp4|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_202431_a79d27a8-434e-4b7f-8d47-a22ba6e48849.mp4
+macro.mp4|https://d8j0ntlcm91z4.cloudfront.net/user_2vQdbkYJJTfppgV7PaStt9K0SSy/hf_20260703_202435_2271715b-2172-41bb-b168-87f73c89a5fe.mp4
