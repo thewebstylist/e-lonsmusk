@@ -1,0 +1,35 @@
+name: Fetch ONYX media assets
+
+# Downloads the generated Seedance 2.0 assets listed in onyx-supply/media-manifest.txt
+# and commits them to this branch. Exists because the authoring sandbox cannot
+# reach the Higgsfield CDN directly.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download assets from manifest
+        run: |
+          set -euo pipefail
+          mkdir -p onyx-supply/media
+          while IFS='|' read -r name url; do
+            [ -z "$name" ] && continue
+            echo "Fetching $name"
+            curl -fsSL --retry 3 -o "onyx-supply/media/$name" "$url"
+            ls -la "onyx-supply/media/$name"
+          done < onyx-supply/media-manifest.txt
+      - name: Commit media
+        run: |
+          git config user.name "onyx-media-bot"
+          git config user.email "actions@github.com"
+          git add onyx-supply/media
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Add generated Seedance 2.0 media assets"
+          git push
