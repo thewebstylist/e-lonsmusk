@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ONYX SUPPLY — MIDNIGHT DROP</title>
 <meta name="description" content="ONYX SUPPLY Midnight Drop — heavyweight hoodie, cargo pants, chrome-accent puffer. Built heavy. Cut clean." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ONYX SUPPLY" />
+<meta property="og:title" content="ONYX SUPPLY — MIDNIGHT DROP" />
+<meta property="og:description" content="Heavyweight hoodie. Cargo pants. Chrome-accent puffer. Built heavy. Cut clean. Drop 001 lands Friday midnight." />
+<meta property="og:url" content="https://sterlingcdn.b-cdn.net/onyx/index.html" />
+<meta property="og:image" content="https://sterlingcdn.b-cdn.net/onyx/onyx-hero-image-OG.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ONYX SUPPLY — MIDNIGHT DROP" />
+<meta name="twitter:description" content="Heavyweight hoodie. Cargo pants. Chrome-accent puffer. Built heavy. Cut clean." />
+<meta name="twitter:image" content="https://sterlingcdn.b-cdn.net/onyx/onyx-hero-image-OG.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Archivo+Narrow:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -349,9 +359,10 @@ footer{border-top:1px solid var(--concrete);padding:34px 4vw 44px;display:flex;f
 <!-- ============ HERO — SCROLL-SCRUBBED WALK ============ -->
 <div class="hero-track" id="top">
   <div class="hero-stage">
+    <!-- all-intra encodes (every frame a keyframe) so scroll-seeking renders every frame -->
     <video id="heroVideo" muted playsinline preload="auto">
-      <source src="media/hero.mp4" type="video/mp4" />
-      <source src="media/hero.webm" type="video/webm" />
+      <source src="media/hero-scrub.mp4" type="video/mp4" />
+      <source src="media/hero-scrub.webm" type="video/webm" />
     </video>
     <div class="hero-shade"></div>
     <div class="hero-copy">
@@ -708,10 +719,11 @@ onScroll();
 
 (function scrubLoop(){
   requestAnimationFrame(scrubLoop);
+  if (!heroDur && heroVideo.duration) heroDur = heroVideo.duration; // metadata may beat the listener
   if (!heroDur) return;
-  currentT += (targetT - currentT) * 0.12;                  // ease toward scroll position
+  currentT += (targetT - currentT) * 0.15;                  // ease toward scroll position
   const t = currentT * Math.max(0, heroDur - 0.05);
-  if (Math.abs(heroVideo.currentTime - t) > 0.01) {
+  if (Math.abs(heroVideo.currentTime - t) > 0.004) {        // all-intra encode → every seek lands on a frame
     try { heroVideo.currentTime = t; } catch(e){}
   }
 })();

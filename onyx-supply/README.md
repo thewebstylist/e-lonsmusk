@@ -9,17 +9,22 @@ consistency.
 
 ```bash
 cd onyx-supply
-python3 -m http.server 4173
+npx http-server -p 4173
 # open http://localhost:4173
 ```
 
-Any static server works; the videos need HTTP (not file://) for range requests.
+Use a server that supports HTTP Range requests (http-server, serve, nginx, any
+CDN). Plain `python3 -m http.server` lacks Range support, which breaks video
+seeking — the hero scroll-scrub will appear frozen or jumpy.
 
 ## What's inside
 
 - **Hero** — 16:9 rooftop walk, scroll-scrubbed: the page pins for 4 viewport
   heights and your scroll position drives `video.currentTime`. Massive Anton
-  type + live countdown to the next Friday 20:00 drop (rolls weekly).
+  type + live countdown to the next Friday 20:00 drop (rolls weekly). The hero
+  plays from `hero-scrub.mp4/.webm` — all-intra re-encodes (every frame a
+  keyframe) so seeks land on every frame instead of jumping between sparse
+  keyframes; `hero.mp4` is the original master.
 - **Product grid** — three 1:1 turntable clips (heavyweight hoodie $180, cargo
   pants $210, chrome-accent puffer $340) that play on hover / tap, with size
   selectors, sold-out sizes that open a restock "Notify me" capture, and Add to
